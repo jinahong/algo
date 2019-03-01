@@ -6,7 +6,7 @@
 ||[6109. 추억의 2048게임](2048game.cpp)||
 |2019/02/21| [농작물 수확하기](farm.cpp)| 나는 배열 인덱스가 싫어요|
 ||[14891. 톱니바퀴](gear.cpp)|문제 제대로 읽어야 할 simulation|
-||[14502. 연구소](lab.cpp)||
+||[14502. 연구소](lab.cpp)|전역변수 남용하지 않기 위해서 2차원배열 parameter로 넘기기, simulation|
 |2019/02/25| [5373. 큐빙](cubing.cpp)|공간 복잡한 simulation|
 ||[14501. 퇴사](quit.cpp)|Knapsack Problem|
 |2019/02/28|[[S/W 문제해결 기본] 9일차 - 사칙연산 유효성 검사](validation.cpp)|input개빡침|

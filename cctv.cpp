@@ -1,15 +1,14 @@
 /*
-   https://www.acmicpc.net/problem/15683
+https://www.acmicpc.net/problem/15683
 
-   많이 제거할 수 있는 거 부터 하는게 좋을 듯.
-   -> 카메라까리는 통과 가능해서, 의미없을듯. 
-   5, 4,3, 2,1 순서대로...
 
-   테헤란로투썸 7:23~
-   코딩만 1시간걸려써 ㅅㅂㅅ
+많이 제거할 수 있는 거 부터 하는게 좋을 듯.
+-> 카메라까리는 통과 가능해서, 의미없을듯. 
+5, 4,3, 2,1 순서대로...
 
-   괜히 map parameter로 보내는 짓하지말자 ^^
-   그냥 global variable로 쓰렴
+- 2차원 배열을 parameter로 넘기는 방법
+- 알고리즘은 없음. 그냥 코딩 하는데 시간 오래걸리는 문제
+
  */
 #include <iostream>
 
@@ -17,9 +16,8 @@ using namespace std;
 typedef struct pos {
     int x; int y;int cctv_kind;
 } pos;
-int arr[8][8];
 
-int shadow_arr[9][8][8];//cams의 idx 를 iteration할때마다 map상태 
+int arr[8][8];
 int ans = 999;
 //save the position of each camera
 pos cams[9];
@@ -42,17 +40,16 @@ void copy_map(int dst[][8], int src[][8])
         for(int j=0;j<m;j++)
             dst[j][i] = src[j][i];
 }
-bool isVisible(int a)
-{
-}
-
+/*
+ 카메라 시야를 map에 체크하는 과정
+ */
 void rotate(int map[][8], int shadow_map[][8], int cam_idx, int* degree, int degree_size)
 {
     copy_map(shadow_map, map);
     for(int i=0;i<degree_size; i++)
     {
-    int x = cams[cam_idx].x;
-    int y = cams[cam_idx].y;
+        int x = cams[cam_idx].x;
+        int y = cams[cam_idx].y;
 
 
         switch(degree[i])
@@ -65,7 +62,7 @@ void rotate(int map[][8], int shadow_map[][8], int cam_idx, int* degree, int deg
                 for(y++;safe(x, y)&& shadow_map[x][y] != WALL ; y++)
                     shadow_map[x][y] = VIEW;
                 break;
-             case 2:
+            case 2:
                 for(x--;safe(x, y) && shadow_map[x][y] != WALL ; x--)
                     shadow_map[x][y] = VIEW;
                 break;
@@ -102,6 +99,10 @@ void debug(int map[][8])
     }
     cout << "===================" << endl;
 }
+/*
+ 각 카메라 별로, 회전가능한 경우를 모두 탐색
+ 시야가 체크된 tmp array는 지역변수로 선언하였다
+ */
 void solve(int cam_idx, int map[][8])
 {
     if(cam_idx<0)
@@ -126,7 +127,7 @@ void solve(int cam_idx, int map[][8])
         ds[0]=0; ds[1] = 2;
         rotate(map, tmp, cam_idx, ds, 2);
         solve(cam_idx-1, tmp);
-        
+
         ds[0]=1; ds[1] = 3;
         rotate(map, tmp, cam_idx, ds, 2);
         solve(cam_idx-1, tmp);
@@ -136,11 +137,11 @@ void solve(int cam_idx, int map[][8])
         ds[0]=0; ds[1] = 3;
         rotate(map, tmp, cam_idx, ds, 2);
         solve(cam_idx-1, tmp);
-        
+
         ds[0]=0; ds[1] = 1;
-         rotate(map, tmp, cam_idx, ds, 2);
+        rotate(map, tmp, cam_idx, ds, 2);
         solve(cam_idx-1, tmp);
-        
+
         ds[0]=1; ds[1] = 2;
         rotate(map, tmp, cam_idx, ds, 2);
         solve(cam_idx-1, tmp);
@@ -155,7 +156,7 @@ void solve(int cam_idx, int map[][8])
         solve(cam_idx-1, tmp);
 
         ds[0]=0; ds[1] = 1; ds[2] = 3; // except 2
-         rotate(map, tmp, cam_idx, ds, 3);
+        rotate(map, tmp, cam_idx, ds, 3);
         solve(cam_idx-1, tmp);
 
         ds[0]=0; ds[1] = 1; ds[2] = 2; // except 3
@@ -166,7 +167,7 @@ void solve(int cam_idx, int map[][8])
         rotate(map, tmp, cam_idx, ds, 3);
         solve(cam_idx-1, tmp);
     }
-     else if(cams[cam_idx].cctv_kind == 5)
+    else if(cams[cam_idx].cctv_kind == 5)
     {
         ds[0]=0; ds[1] = 1; ds[2] = 2; ds[3] = 3;
         rotate(map, tmp, cam_idx, ds, 4);
