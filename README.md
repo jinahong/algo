@@ -10,3 +10,9 @@
 ||[14501. 퇴사](quit.cpp)|
 |2019/02/28|[[S/W 문제해결 기본] 9일차 - 사칙연산 유효성 검사](validation.cpp)|
 ||[삼삼 트리플 게임](triple.cpp)|
+||[15683.감시](cctv.cpp)|
+||[2146.다리 만들기](bridge.cpp)|
+||[9663. N-Queen](nqueen.cpp)|
+|2019/03/04|[퍼펙트 셔플](shuffle.cpp)|
+||[은기의 송아지 세기](calf.cpp)|
+||[16235.나무 제태크](tree.cpp)|
