@@ -15,9 +15,13 @@ int num[10];
 char colors[10];
 int chk[10];
 
-float getAvg(vector<int> vec)
+bool isSet(vector<int> vec)
 {
-    return accumulate( vec.begin(), vec.end(), 0.0)/vec.size();
+    if(vec[0] == vec[1] && vec[1] == vec[2])
+        return true;
+    else if (vec[0] + 2 == vec[1] + 1 && vec[1] + 1 == vec[2])
+        return true;
+    else return false;
 }
 /*
    dfs
@@ -40,8 +44,8 @@ int search6(int level, int cnt, char color)
         }
 
         sort(vec.begin(), vec.end());
-        //고른 3개가 set이 맞는지 확인 
-        if(getAvg(vec) == float(vec[1]))
+        //고른 3개가 set이 맞는지 확인
+        if(isSet(vec))
         {
             // 계산해야할 카드가 더 있음
             if(level > 3)
@@ -84,16 +88,16 @@ int makeset(char color)
         return cnt;
     else return 0;
 }
+
 string solve()
 {
-    //
     int r = makeset('R');
     int g = makeset('G');
     int b = makeset('B');
-    //    cout << " r: " << r << ", g: " << g << ", b: " << b << endl;
     if(r + g + b == 9) return "Win";
     else return "Continue";
 }
+
 int main()
 {
     int tc;
