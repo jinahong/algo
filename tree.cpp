@@ -1,24 +1,22 @@
 /*
- https://www.acmicpc.net/problem/16235
+https://www.acmicpc.net/problem/16235
 
- 봄: 나무들은 자신의 나이만큼 양분 먹고, 나이++, 나이가 어린 나무부터 양분을 먹는다. 양분 못먹는 나무는 죽
- 여름: 봄이 죽은 나무 나이/2만큼이 양분이 됨 
- 가을: 나무나이가 5의배수이면 번식, 인접한 8칸이 나이1인 나무생성.
- 겨울: 각 땅에 양분추가
+봄: 나무들은 자신의 나이만큼 양분 먹고, 나이++, 나이가 어린 나무부터 양분을 먹는다. 양분 못먹는 나무는 죽
+여름: 봄이 죽은 나무 나이/2만큼이 양분이 됨 
+가을: 나무나이가 5의배수이면 번식, 인접한 8칸이 나이1인 나무생성.
+겨울: 각 땅에 양분추가
 
- k년도가 지난후 살아있는 나무 개수는?
+k년도가 지난후 살아있는 나무 개수는?
  */
+#include <vector>
 #include <iostream>
 #include <algorithm>
 using namespace std;
 
 //각 땅정보가 가져야할 정보들
 typedef struct info{
-    int live_tree_old[100];
-    int dead_tree_old[100];
-    int live_tree_cnt;
-    int dead_tree_cnt;
-
+    vector<int> live_tree;
+    vector<int> dead_tree;
     int food;
 } info;
 
@@ -36,32 +34,27 @@ void spring()
         for(int j=0;j<n;j++)
         {
             info* tmp = &arr[j][i];
-            cout << j<<" , " << i << " food:" << arr[j][i].food <<" , live_tree_cnt: "<< arr[j][i].live_tree_cnt << endl;
-            sort(arr[j][i].live_tree_old, arr[j][i].live_tree_old + arr[j][i].live_tree_cnt);
-            for(int a = 0;a < tmp->live_tree_cnt ; a++)
+
+            //정렬
+            sort(tmp->live_tree.begin(), tmp->live_tree.end());
+
+            for(vector<int>::iterator it = tmp->live_tree.begin();
+                    it != tmp->live_tree.end();
+                    ++it)
             {
                 //나무의 양분소비, 나무 나이증가
-                if(tmp->food >= tmp->live_tree_old[a])
+                if(tmp->food >= *it)
                 {
-                    tmp->food -= tmp->live_tree_old[a];
-                    tmp->live_tree_old[a]+=1;
+                    tmp->food -= *it;
+                    *it += 1;
                 }
-                //a이후의 모든 tree는 dead tree 로 옮겨야함.
+                //나무 죽음
                 else
                 {
-                    if(tmp->dead_tree_cnt == 0)
-                    {
-                    tmp->dead_tree_cnt = tmp->live_tree_cnt - a;
-                    tmp->live_tree_cnt = a;
-                    cout << "dead:" <<tmp->dead_tree_cnt << " , remain:" << tmp->live_tree_cnt << endl;
-                    for(int b = 0;b < tmp->dead_tree_cnt;b++, a++)
-                    {
-                        tmp->dead_tree_old[b] = tmp->live_tree_old[a];
-                        tmp->live_tree_old[a] = 0;
-                    }
-                    break;
-                    }
-                    else {cout <<"??????????????????????" << endl;}
+                    tmp->dead_tree.push_back(*it);
+                    tmp->live_tree.erase(it);
+                    //위에서 erase해줬기 때문에, idx맞춰주려면 --필요:ㅈ
+                    --it;
                 }
             }
         }
@@ -74,15 +67,15 @@ void summer()
         for(int j=0;j<n;j++)
         {
             info* tmp = &arr[j][i];
-            if(tmp->dead_tree_cnt > 0)
+
+            for(vector<int>::iterator it = tmp->dead_tree.begin();
+                    it != tmp->dead_tree.end();
+                    ++it)
             {
-            for(int a = 0 ; a < tmp->dead_tree_cnt ; a++)
-            {
-                tmp->food += (tmp->dead_tree_old[a] / 2);
-                tmp->dead_tree_old[a] = 0;
+                tmp->food +=  *it / 2;
             }
-            tmp->dead_tree_cnt = 0;
-            }
+            //dead_tree초기화
+            tmp->dead_tree.clear();
         }
     }
 }
@@ -98,16 +91,18 @@ void addTree(int x, int y)
 }
 void fall()
 {
+    //새로 생겨날 나무를arrForAddTree에 기록함
     for(int i=0;i<n;i++)
     {
         for(int j=0;j<n;j++)
         {
             info* tmp = &arr[j][i];
-            for(int a = 0;a < tmp->live_tree_cnt;a++)
+             for(vector<int>::iterator it = tmp->live_tree.begin();
+                    it != tmp->live_tree.end();
+                    ++it)
             {
-                if(tmp->live_tree_old[a] % 5 == 0)
+                if( *it % 5 == 0)
                 {
-//                    cout << "make tree" << tmp->live_tree_old[a] << endl;
                     addTree(j+1,i+1);
                     addTree(j+1,i);
                     addTree(j,i+1);
@@ -120,24 +115,22 @@ void fall()
             }
         }
     }
+    //arrForAddTree에 있는 정보로 나무들 추가하기. 
     for(int i=0;i<n;i++)
+    {
         for(int j=0;j<n;j++)
         {
-            //나무 추가해 주기
             if(arrForAddTree[j][i] > 0)
             {
-                for(int a = 0; a < arrForAddTree[j][i];a++)
+                for(int a = 0; a < arrForAddTree[j][i] ; a++)
                 {
-                    arr[j][i].live_tree_old[arr[j][i].live_tree_cnt] = 1;
-                    arr[j][i].live_tree_cnt+=1;
+                    arr[j][i].live_tree.push_back(1);
                 }
                 //배열초기화
                 arrForAddTree[j][i] = 0;
             }
-            //정렬
-            if(arr[j][i].live_tree_cnt > 0)
-             sort(arr[j][i].live_tree_old, arr[j][i].live_tree_old + arr[j][i].live_tree_cnt);
         }
+    }
 
 }
 void winter()
@@ -157,7 +150,7 @@ int getAns()
     {
         for(int j=0;j<n;j++)
         {
-            res += arr[j][i].live_tree_cnt;
+            res += arr[j][i].live_tree.size();
         }
     }
     return res;
@@ -188,8 +181,7 @@ int main()
     {
         int x,y, old;
         cin >> x >> y >> old;
-        arr[x-1][y-1].live_tree_old[0] = old;
-        arr[x-1][y-1].live_tree_cnt = 1;
+        arr[x-1][y-1].live_tree.push_back(old);
     }
     cout << solve(k) << endl;
 
