@@ -16,4 +16,4 @@
 ||[9663. N-Queen](nqueen.cpp)||
 |2019/03/04|[퍼펙트 셔플](shuffle.cpp)|easy|
 ||[은기의 송아지 세기](calf.cpp)||
-||[16235.나무 제태크](tree.cpp)|문제 제대로 읽어야 할 simulation||
+||[16235.나무 제태크](tree.cpp)|문제 시킨대로 코딩, 근데 왜안됨?ㅠ|
