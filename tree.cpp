@@ -181,7 +181,7 @@ int main()
     {
         int x,y, old;
         cin >> x >> y >> old;
-        arr[x-1][y-1].live_tree.push_back(old);
+        arr[y-1][x-1].live_tree.push_back(old);
     }
     cout << solve(k) << endl;
 
