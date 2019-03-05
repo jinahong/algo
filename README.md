@@ -15,5 +15,8 @@
 ||[2146.다리 만들기](bridge.cpp)||
 ||[9663. N-Queen](nqueen.cpp)||
 |2019/03/04|[퍼펙트 셔플](shuffle.cpp)|easy|
-||[은기의 송아지 세기](calf.cpp)||
+||[은기의 송아지 세기](calf.cpp)|partial sum, 전역변수 초기화|
 ||[16235.나무 제태크](tree.cpp)|문제 시킨대로 코딩, 근데 왜안됨?ㅠ|
+|2019/03/07|[삼성시의 버스 노선](busline.cpp)|easy|
+||[격자판의 숫자 이어 붙이기](lattice.cpp)|set사용, 전역변수 초기화|
+||[3190. 뱀](dummy.cpp)||
