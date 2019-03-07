@@ -27,8 +27,9 @@ typedef struct d_info{
 } d_info;
 
 int n;
-
+////snake길이, front는 head이고, back은 tail
 vector<info> snake;
+//save input,  after chage the direction,  delete element 
 vector<d_info> direction;
 vector<pair<int, int> > apple;
 
