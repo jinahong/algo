@@ -7,7 +7,6 @@ typedef struct line{
 }line;
 
 line lines[501];
-int getAns[501];
 int solve(int stopNum, int n)
 {
     int sum = 0;
@@ -34,14 +33,12 @@ int main()
         int p;
         cin >> p;
 
-        for(int j=0;j<p;j++)
-        {
-            cin >> getAns[j];
-        }
         cout << "#" << i+1 << " ";
         for(int j=0;j<p;j++)
         {
-            cout << solve(getAns[j], n) << " ";
+            int a;
+            cin >> a;
+            cout << solve(a, n) << " ";
         }
         cout << endl;
     }
