@@ -9,6 +9,7 @@
 ||[14502. 연구소](lab.cpp)|dfs, dfs투성이|
 |2019/02/25| [5373. 큐빙](cubing.cpp)|공간 복잡한 simulation|
 ||[14501. 퇴사](quit.cpp)|Knapsack Problem|
+||[15486. 퇴사2](quit2.cpp)|dp문제|
 |2019/02/28|[[S/W 문제해결 기본] 9일차 - 사칙연산 유효성 검사](validation.cpp)|input받는거 개빡침, getline함수 사용|
 ||[삼삼 트리플 게임](triple.cpp)|나는 dfs를 썻지만, 안써도 가능했던문제..|
 ||[15683.감시](cctv.cpp)|전역변수 남용하지 않기 위해서 2차원배열 parameter로 넘김, simulation|
