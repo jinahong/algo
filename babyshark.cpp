@@ -1,7 +1,17 @@
 /*
-   -좌표 bfs
-   개떡같네. 원래 queue만들었던 거 지우고 vector에 좌표 넣는방식으로 바꿈. 
-   그후, my sort수행. 
+개삽질 log
+1. dfs 방식으로 vector에 좌표 넣는방식을 진행. dup제거, sort함수등등 만듬..
+vector와 관련된 온갖 삽질과 너무 많은 함수들 때문에 코드가 복잡해짐. global변수도 관리힘든지경.
+
+2. visited쓰면 된다는 블로그 봄. 
+그러나 dfs를 쓰면서, vector가 너무 많고, dup제거, sort때문에 시간초과됨
+
+3. bfs + visited로 바꿈. visited에 거리넣는 방식으로 진행. 그러면서 주어진 
+distance에 해당하는 좌표를 구할 필요가 없어짐. 중복되는 연산 없애기 위해서, 
+한번에 reachable 위치를 모두 구하고, 이때의 distance를 visited에 저장.
+
+4. 핵심적으로 visited에 거리를 저장하게 되면서, 시간초과극복. 
+
 
    -조건 확인 제대로 하기
 
@@ -12,11 +22,13 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <queue>
 
 using namespace std;
 
 int arr[21][21];
 int visited[21][21];
+
 int dx[4] = {0,-1,1,0};
 int dy[4] = {-1,0,0,1};
 
@@ -24,185 +36,130 @@ typedef struct pos{
     int x, y, time;
 } pos;
 
-vector<pos> g_v;
-
 int sharkAge = 2;
 int ans;
 int n;
 
-//returning the position of shark
-pos getInput()
+bool safe(int x, int y)
 {
-    pos res;
+    return (x>=0 && y>=0 && x<n && y<n) 
+    && (arr[x][y] == 0 || arr[x][y] <= sharkAge);
+}
+
+//cnt가 0이 될때까지 shark가 이동할 수 있는 곳들
+//XXX: 이동할때 과거에 이동한 좌표는 다시 가지 안도록 해줘야함!! -> bfs+visited로 바꿈
+void bfs(pos shark)
+{
+    queue<pos> q;
+    q.push(shark);
+    visited[shark.x][shark.y] = 1;
+
+    while(!q.empty())
+    {
+        pos tmp = q.front();q.pop();
+        for(int i=0;i<4;i++)
+        {
+            int tx = tmp.x + dx[i];
+            int ty = tmp.y + dy[i];
+            if(safe(tx, ty) && visited[tx][ty] == 0)
+            {
+                visited[tx][ty] = tmp.time+1;
+                pos tmp_push = {tx, ty, tmp.time+1};
+                q.push(tmp_push);
+            }
+        }
+    }
+    //상어 위치는 다시 0으로 세팅해줌 ..ㅈㅅ..
+    visited[shark.x][shark.y] = 0;
+}
+
+//visited에서 먹을 수 있는 고기 있는지 확인
+pos searchEableFish(pos shark)
+{
+    pos ans = shark;
+    ans.time = 9999;
     for(int i=0;i<n;i++)
     {
         for(int j=0;j<n;j++)
         {
-            cin >> arr[j][i];
-            if(arr[j][i]==9)
+            if(visited[j][i] > 0  //reachable
+                && arr[j][i] < sharkAge  //eatable
+                && arr[j][i] > 0)
             {
-                res = (pos){j,i, 0};
-                arr[j][i] = 0;//remove shark position
+                if(ans.time > visited[j][i])
+                {
+                    pos tmp = {j,i,visited[j][i]};
+                    ans = tmp;
+                }
+                else if(ans.time == visited[j][i])
+                {
+                    if(ans.y > i || (ans.y == i && ans.x > j) )
+                    {
+                        pos tmp = {j,i,visited[j][i]};
+                        ans = tmp;
+                    }
+                }
+
             }
         }
     }
-    return res;
-}
 
-bool safe(int x, int y)
-{
-    return (x>=0 && y>=0 && x<n && y<n) && (arr[x][y] == 0 || arr[x][y] <= sharkAge);
-}
-bool nodup(int x, int y)
-{
-    for(vector<pos>::iterator it = g_v.begin();it!=g_v.end();++it)
+    if(shark.x == ans.x && shark.y == ans.y) 
     {
-        if(it->x == x && it->y == y)
-            return false;
+        ans.x = -1; ans.y = -1; ans.time = -1;
     }
-    return true;
-}
-//cnt가 0이 될때까지 bfs
-//무의미하게 가는 방향들이 많음....
-void dfs(int cnt, pos shark, int orig_d, pos orig_s)
-{
-    if(cnt == 0 )
-    {
-        if(visited[shark.x][shark.y] != 0) return;
-        if(!nodup(shark.x, shark.y)) return;
-        pos tmp = shark;
-        tmp.time += orig_d;
-        visited[shark.x][shark.y] = tmp.time;//cnt;
-        g_v.push_back(tmp);
-        return;
-    }
-
-    for(int i=0;i<4;i++)
-    {
-        int tx = shark.x + dx[i];
-        int ty = shark.y + dy[i];
-
-        if(safe(tx, ty) )
-            //                && (visited[tx][ty]>=orig_d-cnt dd|| visited[tx][ty] == 0)
-            //            && (tx != orig_s.x && ty != orig_s.y))
-        {
-            //XXX: 변수 선언없이 바로, 구조체를 dfs넣으면 안됨!!!!!!!!!!!!!
-            pos tmp_pos = {tx, ty, shark.time};
-            dfs(cnt-1, tmp_pos, orig_d, orig_s);
-        }
-    }
-
-}
-//comparison function object (i.e. an object that satisfies the requirements of Compare) which returns ​true if the first argument is less than (i.e. is ordered before) the second. 
-bool my_sort(pos& a, pos& b) 
-{
-    if(a.y < b.y) return true;
-    else if(a.y == b.y)
-    {
-        if(a.x < b.x) return true;
-        else return false;
-    }
-    else
-        return false;
-}
-bool my_unique(pos a, pos b)
-{
-    if(a.x == b.x && a.y == b.y)
-        return true;
-    else return false;
-}
-//shark를 기준으로 distance만큼떨어진 좌표 반환
-void push_next_pos(pos shark, int distance)
-{
-    g_v.clear();
-    visited[shark.x][shark.y] = 1;//true;
-    dfs(distance, shark, distance, shark);
-
-    sort(g_v.begin(), g_v.end(), my_sort);
-    //    g_v.erase( unique(g_v.begin(), g_v.end() , my_unique), g_v.end() );
-}
-
-
-
-bool isEnd()
-{
-    for(int i=0;i<n; i++)
-        for(int j=0;j<n;j++)
-            //먹을수있는 고기 있으면 아직 안끝남. 
-            if(sharkAge > arr[j][i] && arr[j][i] > 0)
-                return false;
-    return true;
-}
-
-//sharks vector중에서 상어가 먹을 수 있는 fish찾기
-pos searchEableFish(vector<pos> sharks)
-{
-    //sharks에 고기가 있는지 확인
-    for(vector<pos>::iterator it = sharks.begin();it!= sharks.end();++it)
-    {
-        //1. 해당 위치가 고기인지 확인
-        if((arr[it->x][it->y] < sharkAge) && (arr[it->x][it->y] > 0))
-            return *it;
-    }
-    return (pos){-1,-1,-1};
-}
-
-void debug(vector<pos> vs)
-{
-    for(vector<pos>::iterator it = vs.begin();it!=vs.end();++it)
-    {
-        cout << "(" << it->x <<"," << it->y<<") ,";
-    }
-    cout << endl;
+    return ans;
 }
 
 
 int main()
 {
+    pos shark;
     vector<pos> sharks;
-    cin >> n;
-    //distance에 있는 shark 좌표를 가짐. 
-    pos shark = getInput();
-    sharks.push_back(shark);
+    scanf("%d", &n);
+
+    for(int i=0;i<n;i++)
+    {
+        for(int j=0;j<n;j++)
+        {
+            scanf("%d", &arr[j][i]);
+            if(arr[j][i] == 9)
+            {
+                shark = (pos){j,i,0};
+                arr[j][i] = 0;//remove shark position
+            }
+        }
+    }
     int eatenfish = 0;
-    int distance = 0;
+    int distance = 1;
 
     while(1)
     {
-        pos it = searchEableFish(sharks);
+        for(int i=0;i<n;i++)
+            for(int j=0;j<n;j++)
+                visited[i][j] = 0;
+
+        //1. shark좌표에서 이동할 수 있는 거리 map만들기 
+        bfs(shark);
+        //2. 먹을 수 있는 고기찾기.
+        pos it = searchEableFish(shark);
+
         if(it.x != -1 && it.y != -1 && it.time != -1)
         {
-            for(int i=0;i<21;i++)
-                for(int j=0;j<21;j++)
-                    visited[i][j] = 0;//false;
-            //        visited[shark.x][shark.y] = 1;
-            //   cout << "eat fish(" << it.x << "," << it.y << ")" << endl;
             arr[it.x][it.y] = 0;
-            eatenfish+=1;
+            eatenfish += 1;
             if(eatenfish == sharkAge)
             {
                 eatenfish = 0;
                 sharkAge += 1;
             }
             ans = it.time;
-            distance = 1;
+            //상어 위치 변경
             shark = it;
-            sharks.clear();
         }
+        //도달 가능한 영역에 먹을 수 있는 고기가 없음. 
         else
-            distance+=1;
-
-        if(isEnd()) break;
-        //3. 다음에 이동할 수 있는 위치 push
-        //       cout << "shark(" << shark.x << "," << shark.y <<") distance:" << distance << endl;
-        push_next_pos(shark, distance);
-
-        if(equal(g_v.begin(), g_v.end(), sharks.begin(),  my_unique))    
-        {
             break;
-        }
-        sharks = g_v;
-        // debug(sharks);
     }
-    cout << ans << endl; 
+    printf("%d\n", ans);
 }

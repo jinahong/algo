@@ -24,3 +24,9 @@
 |2019/03/11|[[S/W 문제해결 응용] 2일차 - 최대 상금](reward.cpp)|dfs|
 ||[[S/W 문제해결 기본] 4일차 - 길찾기](findpath.cpp)||
 ||[13458.시험 감독](supervisor.cpp)|기출인데 왤케쉬움? 테케 스스로 생각하기|
+|2019/03/14||
+
+## By myself
+|Date        | problem title| Memo|
+||(16236.아기 상어)[babyshark.cpp]|새상삽질은 다함. dfs로 했다가 시간초과, bfs|
+|||
