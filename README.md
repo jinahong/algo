@@ -9,7 +9,7 @@
 ||[14502. 연구소](lab.cpp)|dfs, dfs투성이|
 |2019/02/25| [5373. 큐빙](cubing.cpp)|공간 복잡한 simulation|
 ||[14501. 퇴사](quit.cpp)|Knapsack Problem|
-||[15486. 퇴사2](quit2.cpp)|dp문제|
+||[15486. 퇴사2](quit2.cpp)|Knapsack Problem + dp문제|
 |2019/02/28|[[S/W 문제해결 기본] 9일차 - 사칙연산 유효성 검사](validation.cpp)|input받는거 개빡침, getline함수 사용|
 ||[삼삼 트리플 게임](triple.cpp)|나는 dfs를 썻지만, 안써도 가능했던문제..|
 ||[15683.감시](cctv.cpp)|전역변수 남용하지 않기 위해서 2차원배열 parameter로 넘김, simulation|
@@ -26,9 +26,9 @@
 ||[13458.시험 감독](supervisor.cpp)|기출인데 왤케쉬움? 테케 스스로 생각하기|
 |2019/03/14|[2016년 요일 맞추기](datcnt.cpp)|easy, 맨날 c에서 함수 리턴해줘야하는거 까먹음|
 ||[화섭이의 미생물 배양](sup.cpp)||
-||[16234. 인구 이동](migration.cpp)|문제 제대로 읽기|
+||[16234. 인구 이동](migration.cpp)|문제 제대로 읽기, dfs+visited|
 ## By myself
 |Date        | problem title| Memo|
 |:-------------:|:-------------|:-------------| 
-|2019/03/12|[16236.아기 상어](babyshark.cpp)|역대급삽질, 머리좀써라.. dfs로 했다가 시간초과, bfs|
-|||
+|2019/03/12|[16236.아기 상어](babyshark.cpp)|역대급삽질, 머리좀써라.. dfs로 했다가 시간초과, bfs+visited|
+||[7579.앱](app.cpp)| 상향식 dp, 잔잔하게 많은 실수함XXX|
