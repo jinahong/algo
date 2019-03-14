@@ -12,7 +12,7 @@
 ||[15486. 퇴사2](quit2.cpp)|Knapsack Problem + dp문제|
 |2019/02/28|[[S/W 문제해결 기본] 9일차 - 사칙연산 유효성 검사](validation.cpp)|input받는거 개빡침, getline함수 사용|
 ||[삼삼 트리플 게임](triple.cpp)|나는 dfs를 썻지만, 안써도 가능했던문제..|
-||[15683.감시](cctv.cpp)|전역변수 남용하지 않기 위해서 2차원배열 parameter로 넘김, simulation|
+||[15683.감시](cctv.cpp)|XXX: 전역변수 남용하지 않기 위해서 2차원배열 parameter로 넘김, simulation|
 ||[2146.다리 만들기](bridge.cpp)||
 ||[9663. N-Queen](nqueen.cpp)||
 |2019/03/04|[퍼펙트 셔플](shuffle.cpp)|easy|
@@ -26,7 +26,10 @@
 ||[13458.시험 감독](supervisor.cpp)|기출인데 왤케쉬움? 테케 스스로 생각하기|
 |2019/03/14|[2016년 요일 맞추기](datcnt.cpp)|easy, 맨날 c에서 함수 리턴해줘야하는거 까먹음|
 ||[화섭이의 미생물 배양](sup.cpp)||
-||[16234. 인구 이동](migration.cpp)|문제 제대로 읽기, dfs+visited|
+||[16234. 인구 이동](migration.cpp)|XXX:문제 제대로 읽기, dfs+visited|
+|2019/03/18|[규영이와 인영이의 카드게임](cardgame.cpp)|XXX: for문은 항상 적게 도는 걸로|
+||[[S/W 문제해결 응용] 4일차 - 보급로](recover.cpp)||
+||[15686.치킨 배달](chicken.cpp)||
 ## By myself
 |Date        | problem title| Memo|
 |:-------------:|:-------------|:-------------| 
