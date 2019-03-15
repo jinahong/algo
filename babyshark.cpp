@@ -1,16 +1,18 @@
 /*
 개삽질 log
+ 
+ -dfs fail
 1. dfs 방식으로 vector에 좌표 넣는방식을 진행. dup제거, sort함수등등 만듬..
 vector와 관련된 온갖 삽질과 너무 많은 함수들 때문에 코드가 복잡해짐. global변수도 관리힘든지경.
+2. dfs + visited 를 쓰면서, vector가 너무 많고, dup제거, sort때문에 시간초과됨
 
-2. visited쓰면 된다는 블로그 봄. 
-그러나 dfs를 쓰면서, vector가 너무 많고, dup제거, sort때문에 시간초과됨
+-bfs
+3. bfs + visited로 바꿈. visited에 상어와 해당 좌표간의 거리를 입력함. 
+해당 좌표부터 상어까지의 거리를 계산할 필요가 없어지기 때문에 편함. 
 
-3. bfs + visited로 바꿈. visited에 거리넣는 방식으로 진행. 그러면서 주어진 
-distance에 해당하는 좌표를 구할 필요가 없어짐. 중복되는 연산 없애기 위해서, 
-한번에 reachable 위치를 모두 구하고, 이때의 distance를 visited에 저장.
 
-4. 핵심적으로 visited에 거리를 저장하게 되면서, 시간초과극복. 
+사실 설계를 잘못함. 
+거리1만큼 떨어진 위치찾기위해 dfs, 거리2만큼 떨어진 위치 찾으려고 dfs거리다보니 중복된 연산이 너무 많았음.
 
 
    -조건 확인 제대로 하기
@@ -42,12 +44,14 @@ int n;
 
 bool safe(int x, int y)
 {
-    return (x>=0 && y>=0 && x<n && y<n) 
-    && (arr[x][y] == 0 || arr[x][y] <= sharkAge);
+    return (x>=0 && y>=0 && x<n && y<n);
+}
+bool safepass(int x, int y)
+{
+    return (arr[x][y] >= 0 || arr[x][y] <= sharkAge);    
 }
 
-//cnt가 0이 될때까지 shark가 이동할 수 있는 곳들
-//XXX: 이동할때 과거에 이동한 좌표는 다시 가지 안도록 해줘야함!! -> bfs+visited로 바꿈
+//cnt가 0이 될때까지 shark가 이동할 수 있는 좌표들과 그 거리를 visited에 기록
 void bfs(pos shark)
 {
     queue<pos> q;
@@ -61,7 +65,7 @@ void bfs(pos shark)
         {
             int tx = tmp.x + dx[i];
             int ty = tmp.y + dy[i];
-            if(safe(tx, ty) && visited[tx][ty] == 0)
+            if(safe(tx, ty) && safepass(tx, ty) && visited[tx][ty] == 0)
             {
                 visited[tx][ty] = tmp.time+1;
                 pos tmp_push = {tx, ty, tmp.time+1};
@@ -73,8 +77,8 @@ void bfs(pos shark)
     visited[shark.x][shark.y] = 0;
 }
 
-//visited에서 먹을 수 있는 고기 있는지 확인
-pos searchEableFish(pos shark)
+//visited를 보고, 요구사항에 맞게 가장 먼저 먹게되는 고기 찾기. 
+pos searchEatableFish(pos shark)
 {
     pos ans = shark;
     ans.time = 9999;
@@ -142,7 +146,7 @@ int main()
         //1. shark좌표에서 이동할 수 있는 거리 map만들기 
         bfs(shark);
         //2. 먹을 수 있는 고기찾기.
-        pos it = searchEableFish(shark);
+        pos it = searchEatableFish(shark);
 
         if(it.x != -1 && it.y != -1 && it.time != -1)
         {
