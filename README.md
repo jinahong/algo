@@ -35,6 +35,7 @@
 |Date        | problem title| Memo|
 |:-------------:|:-------------|:-------------| 
 ||[15954.인형들](15954.cpp)|long double, partial sum|
+||[15953.상금 헌](huter.cpp)|0-based, 1-based신경써주기|
 |2019/03/12|[16236.아기 상어](babyshark.cpp)|역대급삽질, 머리좀써라.. dfs로 했다가 시간초과, bfs+visited|
 ||[7579.앱](app.cpp)| 상향식 dp, 잔잔하게 많은 실수함XXX|
 ||[2407.조합](combination.cpp)|BigInt구조체, long long으로 안됨|
