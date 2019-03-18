@@ -27,7 +27,7 @@
 |2019/03/14|[2016년 요일 맞추기](datcnt.cpp)|easy, 맨날 c에서 함수 리턴해줘야하는거 까먹음|
 ||[화섭이의 미생물 배양](sup.cpp)|math라서 못안품^^|
 ||[16234. 인구 이동](migration.cpp)|XXX:문제 제대로 읽기, dfs+visited or bfs|
-|2019/03/18|[규영이와 인영이의 카드게임](cardgame.cpp)|XXX: for문은 항상 적게 도는 걸로|
+|2019/03/18|[규영이와 인영이의 카드게임](cardgame.cpp)|combination + visited, for문은 항상 적게 도는 걸로|
 ||[[S/W 문제해결 응용] 4일차 - 보급로](recover.cpp)|dp로품|
 ||[15686.치킨 배달](chicken.cpp)|combination + visited, 함수호출횟수는 동일하더라도 호출을 결정하는 루프는 적도록..|
 ## By myself
