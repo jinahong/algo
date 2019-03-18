@@ -143,6 +143,18 @@ void solve(int start_idx, int dep)
     }
     
     /*
+       time out
+     for(int i = 0 ; i < bbq.size() ; i++)
+    {
+        if(visited[i] == false)
+        {
+            visited[i] = true;
+            solve(i+1, dep-1);
+            visited[i] = false;
+        }
+    }
+    
+
        //같은방법:
         visited[i] = true;//i번째 체인점선택!
         solve(i+1, dep-1);
