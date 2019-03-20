@@ -31,7 +31,7 @@
 ||[[S/W 문제해결 응용] 4일차 - 보급로](recover.cpp)|dp로품|
 ||[15686.치킨 배달](chicken.cpp)|combination + visited, 함수호출횟수는 동일하더라도 호출을 결정하는 루프는 적도록..|
 |2019/03/21|[[S/W 문제해결 기본] 7일차 - 암호생성기](crpyto.cpp)||
-||[7227. 사랑의 카운슬러](counsler.cpp)|XXX 난 combination이어려워|
+||[7227. 사랑의 카운슬러](counselor.cpp)|XXX 난 combination이어려워|
 ||[14499. 주사위 굴리기](dice.cpp)|easy, 60m, simulation|
 ## By myself
 |Date        | problem title| Memo|
