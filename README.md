@@ -34,6 +34,8 @@
 ||[7227. 사랑의 카운슬러](counselor.cpp)|XXX 난 combination이어려워|
 ||[14499. 주사위 굴리기](dice.cpp)|easy, 60m, simulation|
 |2019/03/25|[[모의 SW 역량테스트] 벽돌 깨기](explode.cpp)|c++문법, dfs말고 for문으로..|
+||[15684.사다리 조작](ladder.cpp)|시간초과, dfs+pruning|
+|2019/03/28|[16236.아기상어](babyshark2.cpp)|2번째푸는대도 2시간 ㅠㅠ, bfs, 여전코드보다 빠름|
 ## By myself
 |Date        | problem title| Memo|
 |:-------------:|:-------------|:-------------| 
