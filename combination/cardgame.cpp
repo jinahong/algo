@@ -1,14 +1,21 @@
 /*
 https://www.swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AWgv9va6HnkDFAW0
 
-   dfs시 visited를 18로 잡고, cardA에 해당하는 카드는 visited로 체크한 후, cardB에 해당하는 카드들만 dfs수행. 시간초과됨..
-   ㅂㄷㅂㄷ, 어짜피 visited에서 걸러져서 for문 body실행도 안하지만,
-   for문 자체를 적게도는 것이 이로움...
+- 9!이면 연산량 개많다. 
+    dfs시 visited를 18로 잡고, cardA에 해당하는 카드는 visited로 체크한 후, 
+     cardB에 해당하는 카드들만 dfs수행. 시간초과됨..
+     어짜피 visited에서 걸러져서 for문 body실행도 안하지만,
+     for문 자체를 적게도는 것이 이로움...
+
+- 수행시간 줄이는법: 
+    이미계산한 score가 전체 총합의 반이 넘을 경우. 
 
  */
 #include <iostream>
 #include <set>
+
 using namespace std;
+
 int cardA[10];
 int cardB[10];
 bool visited[10];

@@ -61,8 +61,10 @@ bigInt func(int n, int k)
    // printf("%d %d\n", n,k);
     if(isZoer_bigInt(mem[n][k]))
     {
-        if(n==k) mem[n][k].low = 1;
-        else if(k==1) mem[n][k].low = n;
+        if(n==k) 
+            mem[n][k].low = 1;
+        else if(k==1) 
+            mem[n][k].low = n;
         else 
         {
             mem[n][k] = plus_bigInt( func(n-1,k) , func(n-1,k-1) ); 
