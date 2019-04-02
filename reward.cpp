@@ -17,7 +17,7 @@ https://www.swexpertacademy.com/main/talk/solvingClub/problemView.do?solveclubId
  */
 #include <iostream>
 #include <string>
-#include <string.h>//swea에선 필요하더라....흠.
+#include <string.h>
 #include <algorithm>
 using namespace std;
 
@@ -81,6 +81,7 @@ void solve(string arr, int chance)
     {
         for(int j = i + 1 ; j < arr.size() ; j++)
         {
+            //nice pruing
             if(arr[i] < arr[j])
             {
                 string cand = swap(i,j,arr);
