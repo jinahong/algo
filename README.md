@@ -23,7 +23,7 @@
 ||[14890. 경사로](makepath.cpp)||
 ||[16234. 인구 이동](migration.cpp)|**pure 완탐**|
 
-## Categrize(simulation겸 시키는대로코딩)
+## simulation 및 시키는대로코딩
 | Category      | problem title| Memo|
 |:-------------:|:-------------|:-------------|
 ||[15683.감시](cctv.cpp)|XXX: 전역변수 남용하지 않기 위해서 2차원배열 parameter로 넘김, simulation|
@@ -33,27 +33,28 @@
 ||[5373. 큐빙](cubing.cpp)|공간 복잡한 simulation|
 ||[3190. 뱀](snake.cpp)|문제 시킨대로 코딩, struct만들기, 행열 거꾸로 받아서 고생.. |
 
-## Categrize(combination)
+## combination
 | 체감난이도      | problem title| Memo|
 |:-------------:|:-------------|:-------------|
 ||[15686.치킨 배달](combination/chicken.cpp)|combination, 최소거리 완탐|
-|high|[[S/W 문제해결 응용] 2일차 - 최대 상금](reward.cpp)|combination + 중복가능한 permutation, 연산량 많으므로 pruning이 관건|
+|high|[[S/W 문제해결 응용] 2일차 - 최대 상금](combination/reward.cpp)|combination + 중복가능한 permutation, 연산량 많으므로 pruning이 관건|
 ||[규영이와 인영이의 카드게임](combination/cardgame.cpp)|permutation, 완탐|
 ||[7227. 사랑의 카운슬러](combination/counselor.cpp)|combination, 최소거리 완탐, 문제만 봐서는 permutation 같지만 정답계산하는 방법을 보면 순서필요없음|
 ||[15684.사다리 조작](ladder.cpp)|combination, 시간초과|
-|high|[[모의 SW 역량테스트] 벽돌 깨기](explode.cpp)|permutation + bfs, 완탐|
+|high|[[모의 SW 역량테스트] 벽돌 깨기](combination/explode.cpp)|permutation + bfs, 완탐|
 ||[2407.조합](combination/combination.cpp)|BigInt구조체, long long으로 안됨|
-|Knapsack Problem|[14501. 퇴사](quit.cpp)||
-||[15486. 퇴사2](quit2.cpp)|memoization|
-||[7579.앱](app.cpp)| knapsack문제, 상향식 dp, 잔잔하게 많은 실수함XXX|
+||[14501. 퇴사](quit.cpp)|Knapsack Problem|
+||[15486. 퇴사2](quit2.cpp)|Knapsack Problem + memoization|
+|high|[7579.앱](app.cpp)| knapsack문제, 상향식 dp, 잔잔하게 많은 실수함XXX|
 
-## Categrize(BFS or Complete Search)
+## BFS or Complete Search
 |체감난이도        | problem title| Memo|
 |:-------------:|:-------------|:-------------| 
 |high|[16236.아기 상어](babyshark.cpp)|2019/03/12, 역대급삽질, 머리좀써라.. dfs로 했다가 시간초과, bfs+visited|
 |high|[16236.아기 상어](babyshark2.cpp)|2019/03/28, 2번째푸는대도 2시간 ㅠㅠ, bfs, 이전코드보다 빠름|
-||[7576.토마토](tomato.cpp)|Basic BFS, x,y가 헷갈려 ㅠ|
-## Categrize(etc)
+|low|[7576.토마토](tomato.cpp)|Basic BFS, x,y가 헷갈려 ㅠ|
+
+## etc
 |Category        | problem title| Memo|
 |:-------------:|:-------------|:-------------| 
 |partial sum|[15954.인형들](15954.cpp)|long double, partial sum|
