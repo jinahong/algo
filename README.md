@@ -26,7 +26,7 @@
 ||[13458.시험 감독](supervisor.cpp)|기출인데 왤케쉬움? 테케 스스로 생각하기|
 |2019/03/14|[2016년 요일 맞추기](datcnt.cpp)|easy, 맨날 c에서 함수 리턴해줘야하는거 까먹음|
 ||[화섭이의 미생물 배양](sup.cpp)|math라서 못안품^^|
-||[16234. 인구 이동](migration.cpp)|** pure 완탐**|
+||[16234. 인구 이동](migration.cpp)|**pure 완탐**|
 |2019/03/18|[규영이와 인영이의 카드게임](combination/cardgame.cpp)|permutation, 완탐|
 ||[[S/W 문제해결 응용] 4일차 - 보급로](recover.cpp)|dp로품|
 ||[15686.치킨 배달](combination/chicken.cpp)|combination, 최소거리 완탐|
