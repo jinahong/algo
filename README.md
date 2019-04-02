@@ -40,7 +40,7 @@
 |high|[[S/W 문제해결 응용] 2일차 - 최대 상금](combination/reward.cpp)|combination + 중복가능한 permutation, 연산량 많으므로 pruning이 관건|
 ||[규영이와 인영이의 카드게임](combination/cardgame.cpp)|permutation, 완탐|
 ||[7227. 사랑의 카운슬러](combination/counselor.cpp)|combination, 최소거리 완탐, 문제만 봐서는 permutation 같지만 정답계산하는 방법을 보면 순서필요없음|
-||[15684.사다리 조작](ladder.cpp)|combination, 시간초과|
+||[15684.사다리 조작](combination/ladder.cpp)|combination|
 |high|[[모의 SW 역량테스트] 벽돌 깨기](combination/explode.cpp)|permutation + bfs, 완탐|
 ||[2407.조합](combination/combination.cpp)|BigInt구조체, long long으로 안됨|
 ||[14501. 퇴사](quit.cpp)|Knapsack Problem|
