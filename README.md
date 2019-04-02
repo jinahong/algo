@@ -26,16 +26,18 @@
 ||[13458.시험 감독](supervisor.cpp)|기출인데 왤케쉬움? 테케 스스로 생각하기|
 |2019/03/14|[2016년 요일 맞추기](datcnt.cpp)|easy, 맨날 c에서 함수 리턴해줘야하는거 까먹음|
 ||[화섭이의 미생물 배양](sup.cpp)|math라서 못안품^^|
-||[16234. 인구 이동](migration.cpp)|XXX:문제 제대로 읽기, dfs+visited or bfs|
-|2019/03/18|[규영이와 인영이의 카드게임](combination/cardgame.cpp)|combination + visited, for문은 항상 적게 도는 걸로|
+||[16234. 인구 이동](migration.cpp)|** pure 완탐**|
+|2019/03/18|[규영이와 인영이의 카드게임](combination/cardgame.cpp)|permutation, 완탐|
 ||[[S/W 문제해결 응용] 4일차 - 보급로](recover.cpp)|dp로품|
-||[15686.치킨 배달](combination/chicken.cpp)|combination + visited, 함수호출횟수는 동일하더라도 호출을 결정하는 루프는 적도록..|
+||[15686.치킨 배달](combination/chicken.cpp)|combination, 최소거리 완탐|
 |2019/03/21|[[S/W 문제해결 기본] 7일차 - 암호생성기](crpyto.cpp)||
-||[7227. 사랑의 카운슬러](combination/counselor.cpp)|XXX 난 combination이어려워|
+||[7227. 사랑의 카운슬러](combination/counselor.cpp)|combination, 최소거리 완탐,  문제만 봐서는 cperputation같지만 정답계산하는 방법을 보면 순서필요없음|
 ||[14499. 주사위 굴리기](dice.cpp)|easy, 60m, simulation|
 |2019/03/25|[[모의 SW 역량테스트] 벽돌 깨기](explode.cpp)|c++문법, dfs말고 for문으로..|
-||[15684.사다리 조작](ladder.cpp)|시간초과, dfs+pruning|
+||[15684.사다리 조작](ladder.cpp)|perputation, 시간초과|
 |2019/03/28|[16236.아기상어](babyshark2.cpp)|2번째푸는대도 2시간 ㅠㅠ, bfs, 여전코드보다 빠름|
+|2019/4/4|[5644. [모의 SW 역량테스트] 무선 충전](wireless.cpp)||
+||[14890. 경사로](makepath.cpp)||
 ## By myself
 |Date        | problem title| Memo|
 |:-------------:|:-------------|:-------------| 

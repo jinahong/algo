@@ -1,16 +1,22 @@
 /*
-   https://www.acmicpc.net/problem/15686
+https://www.acmicpc.net/problem/15686
+
+도시에 있는 치킨집 중에서 최대 M개를 고르고, 나머지 치킨집은 모두 폐업시켜야 한다. 
+어떻게 고르면, 도시의 치킨 거리가 가장 작게 될지 구하는 프로그램을 작성하시오.
 
 
-  -  함수 side effect항상 기억하기!!!!!!!
-  
-  time out
-  - 치킨집이랑 집간의 거리구하로겨, bfs했는데 시간 너무걸림.. 그냥 이중포문으로 최소값 찾음
-  -dfs 함수내에서 for문을 많이돌아서 시간초과. start_idx 추가해서 iteration회수줄임. 
+basic: 
+combination + 최소거리
+solve에서 idx 추가해서 iteration회수줄임. 
+
+detail: 
+치킨집이랑 집간의 거리구하는 방법을 처음엔 bfs, 그러나 두 좌표간의 거리를 알기 때문에 이중포문이 시간적게걸린다. 
+
+
  */
 
 #include <iostream>
-#include <queue>
+#include <vector>
 #include <string.h>
 using namespace std;
 
@@ -21,9 +27,11 @@ typedef struct pos{
     int x, y, d;
 } pos;
 
-bool visited[14];
+bool visited[14]; //해당 bbq문 열지말지 결정!
+
 vector<pos> bbq;
 vector<pos> house;
+
 int arr[51][51];
 int n;
 int dx[4] = {0,1,0,-1};
@@ -33,135 +41,39 @@ bool safe(int x, int y)
 {
     return x<n && y<n && x>=0 && y>=0;
 }
-void debug(int map[][51])
-{
-    for(int i=0;i<n;i++)
-    {
-        for(int j=0;j<n;j++)
-            cout << map[j][i] << " ";
-        cout << endl;
-    }
-}
-/*
-   void make_bfs_map(int map[][51])
-   {
-   for(int i=0;i<n;i++)
-   for(int j=0;j<n;j++)
-   {
-   map[j][i] = arr[j][i];
-   }
-   for(int i=0;i<bbq.size();i++) 
-   if(!visited[i])
-   {
-   map[bbq[i].x][bbq[i].y] = 0;
-   }
-}
-int bfs()
-{
-int bfs_map[51][51];
-make_bfs_map(bfs_map);
 
-int res = 0;
-int bfs_housecnt = 0;
-
-queue<pos> q;
-for(int i=0;i<bbq.size();i++)
-if(visited[i]) 
-{
-q.push(bbq[i]);
-}
-
-while(!q.empty())
-{
-pos tmp = q.front();q.pop();
-for(int i=0;i<4;i++)
-{
-int tmpx = tmp.x + dx[i];
-int tmpy = tmp.y + dy[i];
-if(safe(tmpx, tmpy)
-&& bfs_map[tmpx][tmpy] != VISITED)
-{
-if(arr[tmpx][tmpy] == 1)
-{
-bfs_housecnt++;
-res += tmp.d+1;
-if(ans < res) 
-{
-return ans;
-}
-bfs_map[tmpx][tmpy] = VISITED;
-if(house.size() == bfs_housecnt) return res;
-}
-pos pushable = {tmpx, tmpy, tmp.d + 1};
-bfs_map[tmpx][tmpy] = VISITED;
-q.push(pushable);
-}
-}
-}
-return res;
-}
- */
 int getDistance()
 {
     int sum = 0;
     for(vector<pos>::iterator it = house.begin();it!=house.end();++it)
     {
-        int x = it->x;
-        int y = it->y;
-        vector <int> v;
         int minVal = 9999;
-
         for(vector<pos>::iterator it_bbq = bbq.begin();it_bbq!=bbq.end();++it_bbq)
+        {
+            int bbq_idx = it_bbq - bbq.begin();
 
-            if(visited[it_bbq - bbq.begin()])
-                v.push_back(abs((x - it_bbq->x)) + abs((y - it_bbq->y)));
-
-        for (int i = 0; i < v.size(); i++)
-            minVal = min(minVal, v[i]);
-
+            if(visited[bbq_idx])
+                minVal = min(minVal, (abs((it->x - it_bbq->x)) + abs((it->y - it_bbq->y))));
+        }
         sum += minVal;
     }
     return sum;
 }
-void solve(int start_idx, int dep)
+void solve(int idx, int dep)
 {
-    if(start_idx > bbq.size()) return;
-    //visited에서 true로 남은 것들만 거리구하면됨
-    if(dep == 0)
+    if(dep == 0) 
     {
-        //int distance = bfs();
         int distance = getDistance();
         if(ans > distance) ans = distance;
         return;
     }
-    //XXX: bbp 개수만큼 iteration
-    for(int i = start_idx ; i < bbq.size() ; i++)
-    {
-        visited[i] = true;
-        solve(i+1, dep-1);
-        visited[i] = false;
-    }
-    
-    /*
-       time out
-     for(int i = 0 ; i < bbq.size() ; i++)
-    {
-        if(visited[i] == false)
-        {
-            visited[i] = true;
-            solve(i+1, dep-1);
-            visited[i] = false;
-        }
-    }
-    
+    if(idx > bbq.size()) return;
+    visited[idx] = true;//i번째 체인점선택!
+    solve(idx+1, dep-1);
 
-       //같은방법:
-        visited[i] = true;//i번째 체인점선택!
-        solve(i+1, dep-1);
+    visited[idx] = false;//i번째 체인점 안선택!  
+    solve(idx+1, dep);
 
-        visited[i] = false;//i번째 체인점 안선택!  
-        solve(i+1, dep);
-        */
 }
 
 int main()
@@ -176,20 +88,20 @@ int main()
         for(int j=0;j<n;j++)
         {
             cin >> arr[j][i];
-            if(arr[j][i] ==2)
+            if(arr[j][i] == 2)
             {
                 pos tmp = {j,i, 0};
                 bbq.push_back(tmp);
             }
-            else if(arr[j][i] ==1)
+            else if(arr[j][i] == 1)
             {
                 pos tmp = {j,i, 0};
                 house.push_back(tmp);
             }
         }
     }
-    
+
     solve(0, m);
-    
+
     cout << ans << endl;
 }

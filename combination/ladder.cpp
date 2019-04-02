@@ -1,14 +1,21 @@
 /*
+https://www.acmicpc.net/problem/15684
+
+
    1시간 20분 시간초과^^
 
-설계
-dfs
-arr가 true이면, 해당 위치에 사다리 설치되었음.
 
+basic: 
+    최소로 설치해야하는 사다리의 개수는? , 
+    순서 없는 combination(시작 위치를 solve의 parameter로 받아서 시간줄이는것이 핵심ㅂ!)
 
+detail:
+    dfs, 사다리가 2차원이라서 dfs내에서 이중포문
+    arr가 true이면, 해당 위치에 사다리 설치되었음.
+    solve함수를 bool타입으로 하는 방법~
 
-시작 위치를 solve의 parameter로 받아서 시간줄이는것이 핵심ㅂ!
-x,y라는 명대신 col, row로 쓰자...
+minor: 
+    x,y라는 명대신 col, row로 쓰자...
 
  */
 #include <iostream>
@@ -25,6 +32,7 @@ int arr[ROW+1][COL+1];
 int n, m, h;
 bool isAns();
 
+//row, col위치에 사다리를 놓을 수 있는가?
 bool safe(int row, int col)
 {
     if(arr[row][col]) return false;

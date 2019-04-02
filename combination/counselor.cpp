@@ -1,27 +1,28 @@
 /*
+
  https://www.swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AWlQUD2qtysDFAVS
 
-
  시간초과!! IDEA!
+    
+basic: 
+    n개중 n/2개를 선택하는 combination, 최소거리를 완전탐색
 
-1. 처음에 n개에서 2개씩 pick하는 dfs
-2. 인터넷참조
+    문제만 읽어봐서는 perputation인거 같다. 그러나 combination인거 알면, 시간초과 안남!
 
-아무튼 결국 출제자가 원하는 바는,
-벡터의 합의 제곱을 구하기 때문에 모든 쌍을 구하는 게 아니라는 점이다.
-즉, 움직이는 절반의 지렁이만 정하고, 움직이는 지렁이와 움직이지 않는 지렁이를 
-아무렇게나 매치해도 결국 벡터값은 같다.
+    벡터의 합의 제곱을 구하기 때문에, 
+    모든 쌍을 구하는 게 아니라는 점이다. 즉, 순서가 필요없다. 
 
+    즉, 움직이는 절반의 지렁이만 정하고, 움직이는 지렁이와 움직이지 않는 지렁이를 
+    아무렇게나 매치해도 결국 벡터값은 같다.
 
-3. n개중 n/2개 pick하고, 나머지 n/2개순차대로, 
-4. isAns optimization
+detail:
  */
 
 
 #include <iostream>
 #include <cmath> //pow
 #include <climits> //MAX
-#include <string.h> // meset
+#include <string.h> //memset
 
 using namespace std;
 
@@ -50,7 +51,7 @@ long long calc(pos a)
 /*
 XXX:4,022 ms -> 382 ms
 */
-void isAns()
+pos isAns()
 {
     /*
     처음엔 iteration해줫는데, 어짜피 전체 최종 벡터를 구하는 문제이기 떄문에
@@ -86,16 +87,24 @@ void isAns()
     pos tmpans = {tmpx, tmpy};
     if(calc(g_ans) > calc(tmpans))
         g_ans = tmpans;
-
+    return tmpans;
 }
+
 //pick n/2
 void solve2(int idx, int depth)
 {
-    if(depth == 0)
+    if(idx > n) return;
+    if(depth == 0 && idx == n)
     {
-        isAns();
+    //    for(int i=0;i<n;i++)
+    //        cout << visited[i] << " ";
+        cout << endl;
+
+        pos anstmp = isAns();
+    //    cout << "x:" << anstmp.x << ", y: " << anstmp.y << endl; 
         return;
     }
+/*
     for(int i=idx;i<n-1;i++)
     {
         if(visited[i] == false)
@@ -105,26 +114,25 @@ void solve2(int idx, int depth)
             visited[i] = false;
         }
     }
-
-    /*
-    XXX: 똑같은 결과, 근데 시간은 아래가 더 많이걸림
-    visited[idx] = true;
-       solve2(idx+1, depth-1);
-    visited[idx] = false;
-    solve2(idx+1, depth);
-
     */
 
-      /*
-    이건 틀림
+  //  XXX: 똑같은 결과, 근데 시간은 아래가 더 많이걸림
+   visited[idx] = false;
+    solve2(idx+1, depth);
+
+     visited[idx] = true;
+    solve2(idx+1, depth-1);
+
+    
+/*
    
     visited[idx] = false;
     solve2(idx+1, depth);
 
+    visited[idx] = true;
+    solve2(idx+1, depth-1);
 
-        visited[idx] = true;
-       solve2(idx+1, depth-1);
-    */
+*/
 
 
 }
