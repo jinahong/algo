@@ -22,7 +22,6 @@
 ||[[S/W 문제해결 응용] 4일차 - 보급로](recover.cpp)|dp로품|
 ||[15953.상금 헌터](huter.cpp)|0-based, 1-based신경써주기|
 |2019/03/21|[[S/W 문제해결 기본] 7일차 - 암호생성기](crpyto.cpp)||
-
 ||[16234. 인구 이동](migration.cpp)|**pure 완탐**|
 
 ## simulation 및 시키는대로코딩

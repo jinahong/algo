@@ -2,20 +2,19 @@
    https://www.swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AWXRDL1aeugDFAUo
  
  basic:
- 	permutation인줄알았으나 gridy로 가능한 문제
+ 	permutation인줄알았으나 gridy로 가능한 문제, 
+ 	지만 for문 2번돌려서 완탐하는게 빠르다. 
  detail:
  	a,b가 같은 bc사용할수있는 경우 꼼꼼하게 처리해주기.
+ 	1개 있는 경우, 2개있는 경우 나눠서 하는것보다 완전탐색하는게 더 간결하고 빠름. 
 
 
+etc:
  코딩 50분
-
- 20분후동안 버그 찾기
-
-20분후동안 gridy로바꿈
-
-20분동안 디버깅. 아몰라 잘래
-
-40분동안 디버깅해서 solve에서 (1개, 1개이상) 인 경우 찾아서 해결해줌
+ ->20분후동안 버그 찾기
+ ->20분후동안 gridy로바꿈
+ ->40분동안 디버깅해서 solve에서 (1개, 1개이상) 인 경우 찾아서 해결해줌
+ ->완탐으로 변경
  */
 
 #include <iostream>
@@ -125,6 +124,11 @@ int getMaxSum(vector<bc_info> a, vector<bc_info> b)
 	return res;
 }
 
+void debug(vector<bc_info> a)
+{
+	for(int i=0;i<a.size();i++)
+		printf("(%d,%d), power:%d\t", a[i].x, a[i].y, a[i].p);
+}
 int solve(pos a, pos b)
 {
 	int sum = 0;
@@ -133,11 +137,56 @@ int solve(pos a, pos b)
 
 	for(int i=0;i<=max_time;i++)
 	{
+
 		loc_a = movePos(loc_a, arr[0][i]);
 		loc_b = movePos(loc_b, arr[1][i]);
 		vector<bc_info> a_bc = connectable_bcs(loc_a);
 		vector<bc_info> b_bc = connectable_bcs(loc_b);
+/*
+		cout << "a's bc: ";
+		debug(a_bc);
+		cout << endl;
+		cout << "b's bc: ";
+		debug(b_bc);
+		cout << endl;
+*/
+		int loc_sum = 0;
 
+		if(a_bc.size() == 0 && b_bc.size() == 0)
+		{
+			continue;
+		}
+		else if(a_bc.size() > 0 && b_bc.size() == 0)
+			loc_sum = getMaxBc(a_bc).p;
+
+		else if(a_bc.size() == 0 && b_bc.size() > 0)
+			loc_sum = getMaxBc(b_bc).p;
+
+		//완탐으로 바꿈!!!
+		else
+		{
+			for(int i=0;i<a_bc.size();i++)
+			{
+				for(int j=0;j<b_bc.size();j++)
+				{
+					
+					if(isSamebc(a_bc[i], b_bc[j]))
+					{
+						if(loc_sum < a_bc[i].p) 
+							loc_sum = a_bc[i].p;
+					}
+					else
+					{
+						if(loc_sum < a_bc[i].p + b_bc[j].p) 
+							loc_sum = a_bc[i].p + b_bc[j].p;
+					}
+				}
+			}
+		}
+		//cout << i << ",loc_sum: " << loc_sum << endl;
+
+		sum += loc_sum;
+		/*
 		if(a_bc.size() == 0 && b_bc.size() == 0)
 		{
 			continue;
@@ -177,6 +226,7 @@ int solve(pos a, pos b)
 		//a,b모두 1개이상의 연결가능한 bc가 있음.
 		else
 			sum += getMaxSum(a_bc,b_bc);
+			*/
 	}
 	return sum;
 }
