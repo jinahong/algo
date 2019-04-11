@@ -90,16 +90,11 @@ pos isAns()
     return tmpans;
 }
 
-//pick n/2
 void solve2(int idx, int depth)
 {
     if(idx > n) return;
     if(depth == 0 && idx == n)
     {
-    //    for(int i=0;i<n;i++)
-    //        cout << visited[i] << " ";
-        cout << endl;
-
         pos anstmp = isAns();
     //    cout << "x:" << anstmp.x << ", y: " << anstmp.y << endl; 
         return;
@@ -123,16 +118,6 @@ void solve2(int idx, int depth)
      visited[idx] = true;
     solve2(idx+1, depth-1);
 
-    
-/*
-   
-    visited[idx] = false;
-    solve2(idx+1, depth);
-
-    visited[idx] = true;
-    solve2(idx+1, depth-1);
-
-*/
 
 
 }

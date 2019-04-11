@@ -2,8 +2,9 @@
    https://www.swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AWXRDL1aeugDFAUo
  
  basic:
- 	permutation인줄알았으나 gridy로 가능한 문제, 
- 	지만 for문 2번돌려서 완탐하는게 빠르다. 
+ 	문제는 복잡하지만, 풀이는 간단함.
+ 	최대충전량을 찾는 문제로, permutation, 완탐
+ 		- 최소라면, gridy를 시도했겠지만, 굳이그럴필요가 없었음..
  detail:
  	a,b가 같은 bc사용할수있는 경우 꼼꼼하게 처리해주기.
  	1개 있는 경우, 2개있는 경우 나눠서 하는것보다 완전탐색하는게 더 간결하고 빠름. 
@@ -37,6 +38,7 @@ typedef struct bc_info
 	int c; // 충전범위
 	int p; // 성능
 } bc_info;
+
 bc_info bcs[9];
 
 typedef struct pos

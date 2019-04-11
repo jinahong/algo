@@ -2,7 +2,7 @@
 https://www.swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AWgv9va6HnkDFAW0
 
 basic: 
-    9개의 카드중 9개를 선택하며, 카드의 순서가 중요한 perputation
+    9개의 카드중 9개를 선택하며, 카드의 순서가 중요한 permutation
 
     9!이면 연산량 개많다. 
         dfs시 visited를 18로 잡고, cardA에 해당하는 카드는 visited로 체크한 후, 

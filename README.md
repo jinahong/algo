@@ -1,25 +1,20 @@
 ## Study
 |Due Date        | problem title| Memo|
 |:-------------:|:-------------|:-------------|
-|2019/4/4|[5644. [모의 SW 역량테스트] 무선 충전](wireless.cpp)||
-||[14890. 경사로](makepath.cpp)|index꼼꼼히 체크|
-||||
+||[14890.경사로](makepath.cpp)|index꼼꼼히 체크|
+||[12886.돌 그룹](stongroup.cpp)|dfs+chk를 이용한 의외의 문제|
 |2019/02/18| [1247. [S/W 문제해결 응용] 3일차 - 최적 경로](1247.cpp)||
 ||[1206. [S/W 문제해결 기본] 1일차 - View](view.cpp)||
 ||[1227. [S/W 문제해결 기본] 7일차 - 미로2](maze.cpp)||
 |2019/02/21| [농작물 수확하기](farm.cpp)| 나는 배열 인덱스가 싫어요|
-||[14502. 연구소](lab.cpp)|dfs, dfs투성이|
 |2019/02/28|[[S/W 문제해결 기본] 9일차 - 사칙연산 유효성 검사](validation.cpp)|input받는거 개빡침, getline함수 사용|
 ||[삼삼 트리플 게임](triple.cpp)|나는 dfs를 썻지만, 안써도 가능했던문제..|
 ||[2146.다리 만들기](bridge.cpp)||
-||[9663. N-Queen](nqueen.cpp)||
 |2019/03/04|[퍼펙트 셔플](shuffle.cpp)|easy|
 |2019/03/07|[삼성시의 버스 노선](busline.cpp)|easy|
 ||[격자판의 숫자 이어 붙이기](lattice.cpp)|set사용, 전역변수 초기화|
-||[[S/W 문제해결 기본] 4일차 - 길찾기](findpath.cpp)||
 ||[13458.시험 감독](supervisor.cpp)|기출인데 왤케쉬움? 테케 스스로 생각하기|
 |2019/03/14|[2016년 요일 맞추기](datcnt.cpp)|easy, 맨날 c에서 함수 리턴해줘야하는거 까먹음|
-||[[S/W 문제해결 응용] 4일차 - 보급로](recover.cpp)|dp로품|
 ||[15953.상금 헌터](huter.cpp)|0-based, 1-based신경써주기|
 |2019/03/21|[[S/W 문제해결 기본] 7일차 - 암호생성기](crpyto.cpp)||
 ||[16234. 인구 이동](migration.cpp)|**pure 완탐**|
@@ -36,6 +31,11 @@
 ## combination
 | 체감난이도      | problem title| Memo|
 |:-------------:|:-------------|:-------------|
+||[145000. 테트로미노](tetromino.cpp)||
+||[5644. [모의 SW 역량테스트] 무선 충전](combination/wireless.cpp)|permutation|
+||[14502. 연구소](combination/lab.cpp)|dfs, dfs투성이|
+||[2383. [모의 SW 역량테스트] 점심 식사시간](combination/helllunch.cpp)|combination, detail만드는게 어려웠음|
+||[2112. [모의 SW 역량테스트] 보호 필름](combination/film.cpp)|combination을 여러 방법으로 구현해봄|
 ||[15686.치킨 배달](combination/chicken.cpp)|combination, 최소거리 완탐|
 |high|[[S/W 문제해결 응용] 2일차 - 최대 상금](combination/reward.cpp)|combination + 중복가능한 permutation, 연산량 많으므로 pruning이 관건|
 ||[규영이와 인영이의 카드게임](combination/cardgame.cpp)|permutation, 완탐|
@@ -50,10 +50,15 @@
 ## BFS or Complete Search
 |체감난이도        | problem title| Memo|
 |:-------------:|:-------------|:-------------| 
+||[5014.스타트링크](startlink.cpp)|굳이 bfs쓰지 않아도되던...|
+||[[S/W 문제해결 응용] 4일차 - 보급로](recover2.cpp)|dikstra, priority queue,|
+||[[S/W 문제해결 응용] 4일차 - 보급로](recover.cpp)|dp로 안정화될때까지 반복문|
+||[5213.과외맨](lessonman.cpp)|배열이 특이하게 꼼꼼함이 필요|
 |high|[16236.아기 상어](babyshark.cpp)|2019/03/12, 역대급삽질, 머리좀써라.. dfs로 했다가 시간초과, bfs+visited|
 |high|[16236.아기 상어](babyshark2.cpp)|2019/03/28, 2번째푸는대도 2시간 ㅠㅠ, bfs, 이전코드보다 빠름|
+|high|[16236.아기 상어](babyshark3.cpp)|priority queue쓰면 코드가 더 깔끔!|
 |low|[7576.토마토](tomato.cpp)|Basic BFS, x,y가 헷갈려 ㅠ|
-
+||[9663. N-Queen](nqueen.cpp)||
 ## etc
 |Category        | problem title| Memo|
 |:-------------:|:-------------|:-------------| 

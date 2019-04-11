@@ -1,6 +1,10 @@
 /*
 https://www.acmicpc.net/problem/16234
 
+basic: 
+    완전탐색
+
+detail:
 문제 잘읽기....ㅠㅠㅠ
 며칠걸리는지 묻는 문제..
 
@@ -57,6 +61,7 @@ int solve()
     {
         // 하루동안에 이동가능한 group 수
         int count = 1;
+
         for(int i=0;i<n;i++)
         {
             for(int j=0;j<n;j++)
@@ -105,6 +110,7 @@ int solve()
 int main()
 {
     cin >> n >> l >> r;
+
     for(int i=0;i<n;i++)
         for(int j=0;j<n;j++)
             cin >> arr[j][i];
