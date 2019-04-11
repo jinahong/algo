@@ -9,7 +9,6 @@
 |2019/02/21| [농작물 수확하기](farm.cpp)| 나는 배열 인덱스가 싫어요|
 |2019/02/28|[[S/W 문제해결 기본] 9일차 - 사칙연산 유효성 검사](validation.cpp)|input받는거 개빡침, getline함수 사용|
 ||[삼삼 트리플 게임](triple.cpp)|나는 dfs를 썻지만, 안써도 가능했던문제..|
-||[2146.다리 만들기](bridge.cpp)||
 |2019/03/04|[퍼펙트 셔플](shuffle.cpp)|easy|
 |2019/03/07|[삼성시의 버스 노선](busline.cpp)|easy|
 ||[격자판의 숫자 이어 붙이기](lattice.cpp)|set사용, 전역변수 초기화|
@@ -28,10 +27,12 @@
 ||[14891. 톱니바퀴](gear.cpp)|문제 제대로 읽어야 할 simulation|
 ||[5373. 큐빙](cubing.cpp)|공간 복잡한 simulation|
 ||[3190. 뱀](snake.cpp)|문제 시킨대로 코딩, struct만들기, 행열 거꾸로 받아서 고생.. |
+
 ## combination
 | 체감난이도      | problem title| Memo|
 |:-------------:|:-------------|:-------------|
-||[145000. 테트로미노](tetromino.cpp)||
+||[15661. 링크와 스타트](combination/linksoccor.cpp)||
+||[14500. 테트로미노](tetromino.cpp)||
 ||[5644. [모의 SW 역량테스트] 무선 충전](combination/wireless.cpp)|permutation|
 ||[14502. 연구소](combination/lab.cpp)|dfs, dfs투성이|
 ||[2383. [모의 SW 역량테스트] 점심 식사시간](combination/helllunch.cpp)|combination, detail만드는게 어려웠음|
@@ -39,6 +40,7 @@
 ||[15686.치킨 배달](combination/chicken.cpp)|combination, 최소거리 완탐|
 |high|[[S/W 문제해결 응용] 2일차 - 최대 상금](combination/reward.cpp)|combination + 중복가능한 permutation, 연산량 많으므로 pruning이 관건|
 ||[규영이와 인영이의 카드게임](combination/cardgame.cpp)|permutation, 완탐|
+||[규영이와 인영이의 카드게임](combination/cardgame2.cpp)|dfs종료하기 위한 전역변수 없앰.|
 ||[7227. 사랑의 카운슬러](combination/counselor.cpp)|combination, 최소거리 완탐, 문제만 봐서는 permutation 같지만 정답계산하는 방법을 보면 순서필요없음|
 ||[15684.사다리 조작](combination/ladder.cpp)|combination|
 |high|[[모의 SW 역량테스트] 벽돌 깨기](combination/explode.cpp)|permutation + bfs, 완탐|
@@ -58,7 +60,6 @@
 |high|[16236.아기 상어](babyshark2.cpp)|2019/03/28, 2번째푸는대도 2시간 ㅠㅠ, bfs, 이전코드보다 빠름|
 |high|[16236.아기 상어](babyshark3.cpp)|priority queue쓰면 코드가 더 깔끔!|
 |low|[7576.토마토](tomato.cpp)|Basic BFS, x,y가 헷갈려 ㅠ|
-||[9663. N-Queen](nqueen.cpp)||
 ## etc
 |Category        | problem title| Memo|
 |:-------------:|:-------------|:-------------| 

@@ -1,98 +1,116 @@
 /*
-https://www.swexpertacademy.com/main/code/problem/problemDetail.do?contestProbId=AWgv9va6HnkDFAW0
+https://www.swexpertacademy.com/main/talk/solvingClub/problemView.do?solveclubId=AWgn93MasXEDFATd&contestProbId=AV15Khn6AN0CFAYD&probBoxId=AWkz_0kaIEcDFASG&type=PROBLEM&problemBoxTitle=0311&problemBoxCnt=1
 
-basic: 
-    9개의 카드중 9개를 선택하며, 카드의 순서가 중요한 permutation
+## sort
+- string도 begin, end 매개변수 가짐 ㅋ
+- sort함수 리턴값은 void, parameter는 2개 혹은 3개 받음. 
+- iknowmax만들려고 sort함수도 사용
 
-    9!이면 연산량 개많다. 
-        dfs시 visited를 18로 잡고, cardA에 해당하는 카드는 visited로 체크한 후, 
-         cardB에 해당하는 카드들만 dfs수행. 시간초과됨..
-         어짜피 visited에서 걸러져서 for문 body실행도 안하지만,
-         for문 자체를 적게도는 것이 이로움...
-
-- detail:
-    이미 총합계는 정해져 있음.  1+2+...+17+18.
-    그러므로 둘중 절반이상가진 사람이 먼저 나오면, 그사람이 이긴거. 
+## dfs
+- dfs안하려고 했다가 자꾸틀려서 dfs로 품.
+-이중 포문 안에있는 dfs라서, pruing필수.
 
 
+- string <-> int, to_string, stoi 사용
+- string <-> char[]
  */
 #include <iostream>
-#include <set>
-
+#include <string>
+#include <string.h>
+#include <algorithm>
 using namespace std;
 
-int cardA[10];
-int cardB[10];
-bool visited[10];
-int win;
-int lose;
-int sum;
+int ans;
+int iknowmax;
 
-void solve(int round, int score)
+/* arr에서 index idx_a와 idx_b간에 swap한 string을 반환*/
+string swap(int idx_a, int idx_b, string arr)
 {
-    if(round == 9)
+    char tmp = arr[idx_a];
+    arr[idx_a] = arr[idx_b];
+    arr[idx_b] = tmp;
+    return arr;
+}
+
+//arr에서 1번만 swap한 모든 경우중 최대값 리턴
+int getOneSwapMax(string arr)
+{
+    int ans = -9999;
+    for(int i=0;i<arr.size()-1;i++)
     {
-        if(score>0) win++;
-        else if(score<0)lose++;
-        return;
+        int tmp = stoi(swap(i,i+1, arr));
+        if(tmp > ans)
+            ans = tmp;
     }
-    if(score > sum/2) 
+    return ans;
+}
+
+bool solve(string arr, int chance)
+{
+
+   // pruning: chance번 swap하지 않았지만 이미 max값에 도달
+    if(stoi(arr) == iknowmax && chance > 0)
     {
-        win++; return;
-    }
-    if(score * -1 > sum/2)
-    {
-        lose++; return;
+        if(chance % 2 == 0)
+            ans = iknowmax;
+        else if (chance % 2 == 1)
+            ans = getOneSwapMax(arr);
+        return true;
     }
 
-    //9번만 iteration
-    //9개를 모두 선택해야하는 dfs이므로, 항상 0부터 시작하는 for문
-    for(int j=0;j<9;j++)
+    //chance모두 다씀
+    if(chance == 0)
     {
-        if(!visited[j])
+        ans = ans < stoi(arr)? stoi(arr) : ans;
+        return false;
+    }
+
+    for(int i = 0 ; i < arr.size() - 1 ; i++)
+    {
+        for(int j = i + 1 ; j < arr.size() ; j++)
         {
-            visited[j] = true;
-            if(cardA[j] > cardB[round])
-                solve(round+1, score + cardA[j] + cardB[round]);
-            else
-                solve(round+1, score - cardA[j] - cardB[round]);
-            visited[j] = false;
+            //nice pruing
+            if(arr[i] < arr[j])
+            {
+                string cand = swap(i,j,arr);
+                if(solve(cand, chance-1))
+                    return true;
+            }
         }
     }
+    return false;
 }
-void init()
+//arr를 내림차순으로 정렬했을 때 int값을 반환
+//arr를 여러번 swap했을때 최대값을 반환함.
+int getMax(string arr)
 {
-    memset(visited, 0, sizeof(visited));
-    win =0; lose = 0;
+    sort(arr.begin() , arr.end(), greater<char>());
+    return stoi(arr);
+}
+
+//global variable 초기화
+void init(string arr)
+{
+    iknowmax = getMax(arr);
+    ans = stoi(arr);
 }
 
 int main()
 {
-    int tc_cnt;
-    cin >> tc_cnt;
-
-    set<int> s;
-    sum = for(int i=1;i<=18;i++) sum+=i;
-
-    for(int tc = 1; tc <= tc_cnt;tc++)
+    int tc;
+    cin >> tc;
+    for(int i=0;i<tc;i++)
     {
-        init();
-        s.clear();
+        string arr;
+        int chance;
+        cin >> arr;
+        cin >> chance;
 
+        init(arr);
 
-        for(int i=0;i<9;i++)
-        {
-            cin >> cardB[i];
-            s.insert(cardB[i]);
-        }
-        for(int i=1, cnt = 0 ; i<=18 ; i++)
-        {
-            if(s.find(i) == s.end()) cardA[cnt++] = i;
-        }
-        solve(0, 0, 0);
+        solve(arr, chance);
 
-        cout<< "#" << tc << " "<< lose << " " << win << endl; 
+        cout << "#" << i+1 << " " << ans << endl;
     }
-
-
 }
+
