@@ -1,24 +1,32 @@
 /*
-
 https://www.acmicpc.net/problem/14502
 
-0:빈칸, 1:wall, 2: virus
+basic:
+bfs+dfs이다보니 time complexity제대로 계산해봐야함. 
 
-
-벽의 개수는 3개
+detail:
 
  */
 #include <iostream>
-
+#include <queue>
 using namespace std;
 int arr[10][10];
 int spread_arr[10][10];
-int ans=-9999;
+
+int ans = -9999;
 int n, m;
 
 #define WALL 1
 #define EMPTY 0
 #define VIRUS 2
+
+struct pos{
+    int x, y;
+    pos(int _x, int _y) : x(_x), y(_y) {}
+};
+
+int dx[4] = {0,0,1,-1};
+int dy[4] = {1,-1,0,0};
 
 void debug(int dis)
 {
@@ -41,46 +49,38 @@ bool safe(int x,int y)
     return (x < m && x >= 0 && y < n && y >= 0);
 }
 
-void dfs(int x, int y)
-{
-    if(spread_arr[x][y] == EMPTY && safe(x, y))
-    {
-        spread_arr[x][y]= VIRUS;
-    }
-    else return;
 
-    dfs(x+1, y);
-    dfs(x,y+1);
-    dfs(x-1, y);
-    dfs(x, y-1);
-
-}
-
-void copy_arr()
-{
-    for(int i=0;i<n;i++)
-        for(int j=0;j<m;j++)
-            spread_arr[j][i] = arr[j][i];
-}
-
+//bfs, 안전 영역크기 구하기.
 void spread_virus()
 {
+    queue<pos> q;
     for(int i=0;i<n;i++)
-    {
         for(int j=0;j<m;j++)
         {
+            //spread_arr에 copy하기.
+            spread_arr[j][i] = arr[j][i];
             if(spread_arr[j][i] == VIRUS)
-            {
-                int x = j;
-                int y = i;
+                q.push(pos(j,i));
+        }
 
-                dfs(x+1, y);
-                dfs(x,y+1);
-                dfs(x-1, y);
-                dfs(x, y-1);
+    while(!q.empty())
+    {
+        int x = q.front().x;
+        int y = q.front().y;
+        q.pop();
+        
+        for(int i=0;i<4;i++)
+        {
+            int nx = x + dx[i];
+            int ny = y + dy[i]; 
+            if(safe(nx, ny) && spread_arr[nx][ny] == EMPTY)
+            {
+                spread_arr[nx][ny] = VIRUS;
+                q.push(pos(nx, ny));
             }
         }
     }
+
 }
 void get_safe_space()
 {
@@ -95,11 +95,10 @@ void get_safe_space()
     }
 }
 
-void build_wall(int cnt)
+void solve(int cnt)
 {
     if(cnt == 3)
     {
-        copy_arr();
         spread_virus();
         get_safe_space();
         return;
@@ -112,16 +111,11 @@ void build_wall(int cnt)
             if(arr[j][i] == EMPTY)
             {
                 arr[j][i] = WALL;
-                build_wall(cnt+1);
+                solve(cnt+1);
                 arr[j][i] = EMPTY;
             }
         }
     }
-}
-
-void solve()
-{
-    build_wall(0);
 }
 
 int main()
@@ -132,6 +126,6 @@ int main()
         for(int j=0;j<m;j++)
             cin >> arr[j][i];
 
-    solve();
+    solve(0);
     cout << ans << endl;
 }

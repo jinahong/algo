@@ -2,7 +2,6 @@
 |Due Date        | problem title| Memo|
 |:-------------:|:-------------|:-------------|
 ||[14890.경사로](makepath.cpp)|index꼼꼼히 체크|
-||[12886.돌 그룹](stongroup.cpp)|dfs+chk를 이용한 의외의 문제|
 |2019/02/18| [1247. [S/W 문제해결 응용] 3일차 - 최적 경로](1247.cpp)||
 ||[1206. [S/W 문제해결 기본] 1일차 - View](view.cpp)||
 ||[1227. [S/W 문제해결 기본] 7일차 - 미로2](maze.cpp)||
@@ -16,7 +15,7 @@
 |2019/03/14|[2016년 요일 맞추기](datcnt.cpp)|easy, 맨날 c에서 함수 리턴해줘야하는거 까먹음|
 ||[15953.상금 헌터](huter.cpp)|0-based, 1-based신경써주기|
 |2019/03/21|[[S/W 문제해결 기본] 7일차 - 암호생성기](crpyto.cpp)||
-||[16234. 인구 이동](migration.cpp)|**pure 완탐**|
+
 
 ## simulation 및 시키는대로코딩
 | Category      | problem title| Memo|
@@ -27,20 +26,28 @@
 ||[14891. 톱니바퀴](gear.cpp)|문제 제대로 읽어야 할 simulation|
 ||[5373. 큐빙](cubing.cpp)|공간 복잡한 simulation|
 ||[3190. 뱀](snake.cpp)|문제 시킨대로 코딩, struct만들기, 행열 거꾸로 받아서 고생.. |
+## 완탐 + chk
+| 체감난이도      | problem title| Memo|
+|:-------------:|:-------------|:-------------|
+
+
+||[16234. 인구 이동](migration.cpp)|**pure 완탐**|
 
 ## combination
 | 체감난이도      | problem title| Memo|
 |:-------------:|:-------------|:-------------|
+||[12886.돌 그룹](stongroup.cpp)|dfs, 해당 노드 방문여부가 N-dimension|
+||[12969.ABC](abc.cpp)|dfs, 해당 노드 방문여부가 N-dimension|
+
 ||[15661. 링크와 스타트](combination/linksoccor.cpp)||
 ||[14500. 테트로미노](tetromino.cpp)||
 ||[5644. [모의 SW 역량테스트] 무선 충전](combination/wireless.cpp)|permutation|
-||[14502. 연구소](combination/lab.cpp)|dfs, dfs투성이|
+||[14502. 연구소](combination/lab.cpp)|dfs, bfs, map크기작아서 괜찮|
 ||[2383. [모의 SW 역량테스트] 점심 식사시간](combination/helllunch.cpp)|combination, detail만드는게 어려웠음|
 ||[2112. [모의 SW 역량테스트] 보호 필름](combination/film.cpp)|combination을 여러 방법으로 구현해봄|
 ||[15686.치킨 배달](combination/chicken.cpp)|combination, 최소거리 완탐|
 |high|[[S/W 문제해결 응용] 2일차 - 최대 상금](combination/reward.cpp)|combination + 중복가능한 permutation, 연산량 많으므로 pruning이 관건|
-||[규영이와 인영이의 카드게임](combination/cardgame.cpp)|permutation, 완탐|
-||[규영이와 인영이의 카드게임](combination/cardgame2.cpp)|dfs종료하기 위한 전역변수 없앰.|
+||[규영이와 인영이의 카드게임](combination/cardgame2.cpp)|permutation, 완탐|
 ||[7227. 사랑의 카운슬러](combination/counselor.cpp)|combination, 최소거리 완탐, 문제만 봐서는 permutation 같지만 정답계산하는 방법을 보면 순서필요없음|
 ||[15684.사다리 조작](combination/ladder.cpp)|combination|
 |high|[[모의 SW 역량테스트] 벽돌 깨기](combination/explode.cpp)|permutation + bfs, 완탐|
