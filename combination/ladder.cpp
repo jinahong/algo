@@ -71,7 +71,6 @@ bool solve(int x, int depth, int limits)
             if(safe(i,j))
             {
                 arr[i][j] = true;
-
                 //XXX
                 if(solve(i, depth+1, limits))
                     return true;

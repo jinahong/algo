@@ -20,25 +20,18 @@
 ## simulation 및 시키는대로코딩
 | Category      | problem title| Memo|
 |:-------------:|:-------------|:-------------|
-||[15683.감시](cctv.cpp)|XXX: 전역변수 남용하지 않기 위해서 2차원배열 parameter로 넘김, simulation|
 ||[16235.나무 제태크](tree.cpp)|문제 시킨대로 코딩, struct만들기, 행열 거꾸로 받아서 개고생..|
 ||[14499. 주사위 굴리기](dice.cpp)|easy, 60m, simulation|
 ||[14891. 톱니바퀴](gear.cpp)|문제 제대로 읽어야 할 simulation|
 ||[5373. 큐빙](cubing.cpp)|공간 복잡한 simulation|
 ||[3190. 뱀](snake.cpp)|문제 시킨대로 코딩, struct만들기, 행열 거꾸로 받아서 고생.. |
-## 완탐 + chk
-| 체감난이도      | problem title| Memo|
-|:-------------:|:-------------|:-------------|
-
-
-||[16234. 인구 이동](migration.cpp)|**pure 완탐**|
 
 ## combination
 | 체감난이도      | problem title| Memo|
 |:-------------:|:-------------|:-------------|
+||[15683.감시](cctv.cpp)|smiulation급 복잡한 combination,전역변수 남용하지 않기 위해서 2차원배열 parameter로 넘김|
 ||[12886.돌 그룹](stongroup.cpp)|dfs, 해당 노드 방문여부가 N-dimension|
 ||[12969.ABC](abc.cpp)|dfs, 해당 노드 방문여부가 N-dimension|
-
 ||[15661. 링크와 스타트](combination/linksoccor.cpp)||
 ||[14500. 테트로미노](tetromino.cpp)||
 ||[5644. [모의 SW 역량테스트] 무선 충전](combination/wireless.cpp)|permutation|
@@ -59,14 +52,16 @@
 ## BFS or Complete Search
 |체감난이도        | problem title| Memo|
 |:-------------:|:-------------|:-------------| 
-||[5014.스타트링크](startlink.cpp)|굳이 bfs쓰지 않아도되던...|
-||[[S/W 문제해결 응용] 4일차 - 보급로](recover2.cpp)|dikstra, priority queue,|
-||[[S/W 문제해결 응용] 4일차 - 보급로](recover.cpp)|dp로 안정화될때까지 반복문|
-||[5213.과외맨](lessonman.cpp)|배열이 특이하게 꼼꼼함이 필요|
-|high|[16236.아기 상어](babyshark.cpp)|2019/03/12, 역대급삽질, 머리좀써라.. dfs로 했다가 시간초과, bfs+visited|
-|high|[16236.아기 상어](babyshark2.cpp)|2019/03/28, 2번째푸는대도 2시간 ㅠㅠ, bfs, 이전코드보다 빠름|
-|high|[16236.아기 상어](babyshark3.cpp)|priority queue쓰면 코드가 더 깔끔!|
+||[16234. 인구 이동](bfs/migration.cpp)|bfs,dfs든 상관없음. 조건이 복잡함..|
+||[5014.스타트링크](bfs/startlink.cpp)|굳이 bfs쓰지 않아도되던...|
+||[[S/W 문제해결 응용] 4일차 - 보급로](bfs/recover2.cpp)|dikstra, priority queue,|
+||[[S/W 문제해결 응용] 4일차 - 보급로](bfs/recover.cpp)|dp로 안정화될때까지 반복문|
+||[5213.과외맨](bfs/lessonman.cpp)|배열이 특이하게 꼼꼼함이 필요|
+|high|[16236.아기 상어](bfs/babyshark.cpp)|2019/03/12, 역대급삽질, 머리좀써라.. dfs로 했다가 시간초과, bfs+visited|
+|high|[16236.아기 상어](bfs/babyshark2.cpp)|2019/03/28, 2번째푸는대도 2시간 ㅠㅠ, bfs, 이전코드보다 빠름|
+|high|[16236.아기 상어](bfs/babyshark3.cpp)|priority queue쓰면 코드가 더 깔끔!|
 |low|[7576.토마토](tomato.cpp)|Basic BFS, x,y가 헷갈려 ㅠ|
+
 ## etc
 |Category        | problem title| Memo|
 |:-------------:|:-------------|:-------------| 

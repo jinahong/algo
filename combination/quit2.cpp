@@ -9,11 +9,9 @@ memoization하니깐 시간 진짜오래걸린다 ㅋㅋ
 using namespace std;
 
 int arr[1500001][2];
-int N; // 최대 1,500,000
-
+int N;
 //일할수있는 날은 최대는 1500001
 int dp[1500001];
-
 
 int solve(int i)
 {

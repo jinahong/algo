@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <vector>
 using namespace std;
 
 char cube[6][9];
@@ -15,21 +15,17 @@ typedef struct side_info{
 #define b   3
 #define l   4
 #define r   5
+
 void print_upper_side();
+
 void init()
 {
-    for(int i=0;i<9;i++)
-        cube[u][i] = 'w';  
-    for(int i=0;i<9;i++)
-        cube[f][i] = 'r';  
-    for(int i=0;i<9;i++)
-        cube[d][i] = 'y';  
-    for(int i=0;i<9;i++)
-        cube[b][i] = 'o';  
-    for(int i=0;i<9;i++)
-        cube[l][i] = 'g';  
-    for(int i=0;i<9;i++)
-        cube[r][i] = 'b';
+    for(int i=0;i<9;i++) cube[u][i] = 'w';
+    for(int i=0;i<9;i++) cube[f][i] = 'r';
+    for(int i=0;i<9;i++) cube[d][i] = 'y';
+    for(int i=0;i<9;i++) cube[b][i] = 'o';
+    for(int i=0;i<9;i++) cube[l][i] = 'g';
+    for(int i=0;i<9;i++) cube[r][i] = 'b';
 }
 
 void putArr(side_info info, char* arr)
@@ -87,6 +83,34 @@ char* getArr(side_info info, char* tmp)
     }
     return tmp;
 }
+void rotate_square(int square, char direction)
+{
+    vector<char> tmp;
+    if(direction == '+')
+    {
+        for(int j=2;j>=0;j--)
+            for(int i=0;i<3;i++)
+                tmp.push_back(cube[square][j+i*3]);
+        for(int i=8;i>=0;i--)
+        {
+            cube[square][i] = tmp.back();
+            tmp.pop_back();
+        }
+
+    }
+    else if(direction == '-')
+     {
+        for(int j=6;j<9;j++)
+            for(int i=0;i<3;i++)
+                tmp.push_back(cube[square][j-i*3]);
+         for(int i=8;i>=0;i--)
+        {
+            cube[square][i] = tmp.back();
+            tmp.pop_back();
+        }
+    }
+
+}
 /*a는 윗변, b,c,d는 시계방향*/
 void rotate(
         side_info s1, 
@@ -124,7 +148,7 @@ void print_upper_side()
         if(i%3 == 0) cout << endl;
     }
 }
-
+//WTF!!! crazy...
 void solve(string r_info)
 {
     side_info s1; //사각형을 윗면부터 시계방향으로
@@ -136,14 +160,16 @@ void solve(string r_info)
         s1 = (side_info){u, 3}; 
         s2 = (side_info){r, 4}; 
         s3 = (side_info){d, 3}; 
-        s4 = (side_info){l, 2};
+        s4 = (side_info){l, 4};
+        rotate_square(f, r_info[1]);
     }
     else if(r_info[0] == 'R')
     {
         s1 = (side_info){u, 2}; 
-        s2 = (side_info){b, 4}; 
-        s3 = (side_info){d, 4}; 
+        s2 = (side_info){b, 2}; 
+        s3 = (side_info){d, 2}; 
         s4 = (side_info){f, 2};
+        rotate_square(r, r_info[1]);
     }
     else if(r_info[0] == 'U')
     {
@@ -151,27 +177,31 @@ void solve(string r_info)
         s2 = (side_info){r, 1}; 
         s3 = (side_info){f, 1}; 
         s4 = (side_info){l, 1};
+        rotate_square(u, r_info[1]);
     }
     else if(r_info[0] == 'B')
     {
         s1 = (side_info){u, 1}; 
-        s2 = (side_info){l, 4}; 
+        s2 = (side_info){r, 2}; 
         s3 = (side_info){d, 1}; 
-        s4 = (side_info){r, 2};
+        s4 = (side_info){l, 2};
+        rotate_square(b, r_info[1]);
     }
     else if(r_info[0] == 'L')
     {
         s1 = (side_info){u, 4};
-        s2 = (side_info){f, 4}; 
+        s2 = (side_info){b, 4}; 
         s3 = (side_info){d, 4}; 
-        s4 = (side_info){b, 2};
+        s4 = (side_info){f, 4};
+        rotate_square(l, r_info[1]);
     }
     else if(r_info[0] == 'D')
     {
-        s1 = (side_info){f, 3}; 
+        s1 = (side_info){b, 3}; 
         s2 = (side_info){r, 3}; 
-        s3 = (side_info){b, 3}; 
+        s3 = (side_info){f, 3}; 
         s4 = (side_info){l, 3};
+        rotate_square(d, r_info[1]);
     }
     rotate(s1, s2, s3, s4, r_info[1]);
 }

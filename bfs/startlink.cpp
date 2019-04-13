@@ -23,13 +23,14 @@ struct info{
     info(int _x, int _y) : floor(_x), depth(_y) {}
 };
 int f, s, g, u, d;
+
 int solve()
 {
-    int ans = 0;
     queue<info> q;
-    info tmp(s,0);
-    q.push(tmp);
+    q.push(tmp(s,0));
+    
     visited[s]= true;
+
     while(!q.empty())
     {
         info elem = q.front();q.pop();

@@ -57,8 +57,8 @@ info eatFish(int x, int y)
     bool visited[21][21] = {0,};
     priority_queue<info, vector<info>, greater<info> > q;
     //첫 시작 depth는 0으로!
-    info init(x,y,0);
-    q.push(init);
+    q.push(init(x,y,0));
+    
     visited[init.x][init.y] = true;
 
     //이번 함수에서 먹을 고기 저장!!

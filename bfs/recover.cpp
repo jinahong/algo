@@ -32,11 +32,7 @@ struct info{
     int x, y, d;
     info(){}
     
-    info(int _x, int _y, int _d){
-        x = _x;
-        d = _d;
-        y = _y;
-    }
+    info(int _x, int _y, int _d) : x(_x), y(_y), d(_d) {}
     //a가 작으면 true
     bool operator > (const info a) const
     {
@@ -131,10 +127,9 @@ int pq_func()
 
     priority_queue<info, vector<info>, greater<info> > pq;
     //queue<info> pq;
-    info init(0,0,0);
-    pq.push(init);
-    dp[0][0] = 0;
+    pq.push(init(0,0,0));
 
+    dp[0][0] = 0;
 
     while(!pq.empty())
     {

@@ -1,7 +1,17 @@
+/*
+basic:
+dfs, bfs모두가능
+
+detail:
+
+*/
+
 #include <iostream>
 #include <queue>
 using namespace std;
+
 bool chk[1501][1501];
+
 struct info{
     int x, y;
     info(int x,int y) : x(x),y(y){}
@@ -13,12 +23,14 @@ bool safe(int a, int b, int c)
     return a>0 && b>0 && a<=1500 && b <= 1500 && c >0 && c <= 1500;
 }
 int sum;
+
 //a, b값 교환하기
 void solve(int a, int b)
 {
     cout << "a:" << a << ", b: " << b << endl;
     int c = sum - a - b;
-    if(!safe(a,b, c)) return;
+    if(!safe(a,b,c)) return;
+    //답찾음
     if(a == sum/3 && b == sum/3)
     {
         chk[a][b] = true;

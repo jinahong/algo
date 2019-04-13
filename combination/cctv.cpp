@@ -1,20 +1,26 @@
 /*
 https://www.acmicpc.net/problem/15683
 
+basic:
+8대의 카메라가 볼 수 있는 모든 경우를 조합해야함. 
 
-많이 제거할 수 있는 거 부터 하는게 좋을 듯.
--> 카메라까리는 통과 가능해서, 의미없을듯. 
-5, 4,3, 2,1 순서대로...
+worst: 각 카메라가 4개의 방향이 가능할경우, 4^8 = 2^16
 
+detail:
 - 2차원 배열을 parameter로 넘기는 방법
-- 알고리즘은 없음. 그냥 코딩 하는데 시간 오래걸리는 문제
+
+- 각 경우를 나눠주려면 코딩 하는데 시간 오래걸린다. 
+경우가 크기 않기 때문에, 방향이 2개만 가능하더라도 
+그냥 코딩상 편하려면..4번으로 간주해도됨
 
  */
 #include <iostream>
 
 using namespace std;
 typedef struct pos {
-    int x; int y;int cctv_kind;
+    int x; 
+    int y;
+    int cctv_kind;
 } pos;
 
 int arr[8][8];
@@ -31,8 +37,7 @@ int m;
 
 bool safe(int x, int y)
 {
-    if(x>=0 && x<m && y>=0 && y<n) return true;
-    else return false;
+    retuern (x>=0 && x<m && y>=0 && y<n);
 }
 void copy_map(int dst[][8], int src[][8])
 {
@@ -45,12 +50,13 @@ void copy_map(int dst[][8], int src[][8])
  */
 void rotate(int map[][8], int shadow_map[][8], int cam_idx, int* degree, int degree_size)
 {
+    //copy from map to. hadow_map
     copy_map(shadow_map, map);
+    
     for(int i=0;i<degree_size; i++)
     {
         int x = cams[cam_idx].x;
         int y = cams[cam_idx].y;
-
 
         switch(degree[i])
         {
@@ -105,73 +111,76 @@ void debug(int map[][8])
  */
 void solve(int cam_idx, int map[][8])
 {
-    if(cam_idx<0)
+    if(cam_idx < 0)
     {
         chk_blind_spot(map);
         return;
     }
+    //카메라가 볼 수 있는 시야 방향을 저장. 
     int ds[4]={0,};
-    int tmp[8][8];
+
+    int shadow_map[8][8];
+
     if(cams[cam_idx].cctv_kind == 1)
     {
         for(int d = 0 ; d < 4 ; d++)
         {
             ds[0] = d;
-            rotate(map, tmp, cam_idx, ds, 1);
-            debug(tmp);
-            solve(cam_idx-1, tmp);
+            rotate(map, shadow_map, cam_idx, ds, 1);
+          //  debug(tmp);
+            solve(cam_idx-1, shadow_map);
         }
     }
     else if(cams[cam_idx].cctv_kind == 2)
     {
         ds[0]=0; ds[1] = 2;
-        rotate(map, tmp, cam_idx, ds, 2);
-        solve(cam_idx-1, tmp);
+        rotate(map, shadow_map, cam_idx, ds, 2);
+        solve(cam_idx-1, shadow_map);
 
         ds[0]=1; ds[1] = 3;
-        rotate(map, tmp, cam_idx, ds, 2);
-        solve(cam_idx-1, tmp);
+        rotate(map, shadow_map, cam_idx, ds, 2);
+        solve(cam_idx-1, shadow_map);
     }
     else if(cams[cam_idx].cctv_kind == 3)
     {
         ds[0]=0; ds[1] = 3;
-        rotate(map, tmp, cam_idx, ds, 2);
-        solve(cam_idx-1, tmp);
+        rotate(map, shadow_map, cam_idx, ds, 2);
+        solve(cam_idx-1, shadow_map);
 
         ds[0]=0; ds[1] = 1;
-        rotate(map, tmp, cam_idx, ds, 2);
-        solve(cam_idx-1, tmp);
+        rotate(map, shadow_map, cam_idx, ds, 2);
+        solve(cam_idx-1, shadow_map);
 
         ds[0]=1; ds[1] = 2;
-        rotate(map, tmp, cam_idx, ds, 2);
-        solve(cam_idx-1, tmp);
+        rotate(map, shadow_map, cam_idx, ds, 2);
+        solve(cam_idx-1, shadow_map);
         ds[0]=2; ds[1] = 3;
-        rotate(map, tmp, cam_idx, ds, 2);
-        solve(cam_idx-1, tmp);
+        rotate(map, shadow_map, cam_idx, ds, 2);
+        solve(cam_idx-1, shadow_map);
     }
     else if(cams[cam_idx].cctv_kind == 4)
     {
         ds[0]=0; ds[1] = 2; ds[2] = 3;//except 1
-        rotate(map, tmp, cam_idx, ds, 3);
-        solve(cam_idx-1, tmp);
+        rotate(map, shadow_map, cam_idx, ds, 3);
+        solve(cam_idx-1, shadow_map);
 
         ds[0]=0; ds[1] = 1; ds[2] = 3; // except 2
-        rotate(map, tmp, cam_idx, ds, 3);
-        solve(cam_idx-1, tmp);
+        rotate(map, shadow_map, cam_idx, ds, 3);
+        solve(cam_idx-1, shadow_map);
 
         ds[0]=0; ds[1] = 1; ds[2] = 2; // except 3
-        rotate(map, tmp, cam_idx, ds, 3);
-        solve(cam_idx-1, tmp);
+        rotate(map, shadow_map, cam_idx, ds, 3);
+        solve(cam_idx-1, shadow_map);
 
         ds[0]=1; ds[1] = 2; ds[2] =3; //decept 0
-        rotate(map, tmp, cam_idx, ds, 3);
-        solve(cam_idx-1, tmp);
+        rotate(map, shadow_map, cam_idx, ds, 3);
+        solve(cam_idx-1, shadow_map);
     }
     else if(cams[cam_idx].cctv_kind == 5)
     {
         ds[0]=0; ds[1] = 1; ds[2] = 2; ds[3] = 3;
-        rotate(map, tmp, cam_idx, ds, 4);
-        solve(cam_idx-1, tmp);
+        rotate(map, shadow_map, cam_idx, ds, 4);
+        solve(cam_idx-1, shadow_map);
     }
 
 }
