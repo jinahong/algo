@@ -29,11 +29,11 @@
 ## combination
 | 체감난이도      | problem title| Memo|
 |:-------------:|:-------------|:-------------|
-||[15683.감시](cctv.cpp)|smiulation급 복잡한 combination,전역변수 남용하지 않기 위해서 2차원배열 parameter로 넘김|
-||[12886.돌 그룹](stongroup.cpp)|dfs, 해당 노드 방문여부가 N-dimension|
-||[12969.ABC](abc.cpp)|dfs, 해당 노드 방문여부가 N-dimension|
+||[15683.감시](combination/cctv.cpp)|smiulation급 복잡한 combination, 전역변수 남용하지 않기 위해서 2차원배열 parameter로 넘김|
+||[12886.돌 그룹](combination/stongroup.cpp)|dfs, 해당 노드 방문여부가 N-dimension|
+||[12969.ABC](combination/abc.cpp)|dfs, 해당 노드 방문여부가 N-dimension|
 ||[15661. 링크와 스타트](combination/linksoccor.cpp)||
-||[14500. 테트로미노](tetromino.cpp)||
+||[14500. 테트로미노](combination/tetromino.cpp)||
 ||[5644. [모의 SW 역량테스트] 무선 충전](combination/wireless.cpp)|permutation|
 ||[14502. 연구소](combination/lab.cpp)|dfs, bfs, map크기작아서 괜찮|
 ||[2383. [모의 SW 역량테스트] 점심 식사시간](combination/helllunch.cpp)|combination, detail만드는게 어려웠음|
