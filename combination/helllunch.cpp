@@ -24,6 +24,7 @@ int ans = 99999;
 pos people[11];
 pos door1;
 int stair1;
+
 pos door2;
 int stair2;
 

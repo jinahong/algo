@@ -10,7 +10,8 @@ combination + 최소거리
 solve에서 idx 추가해서 iteration회수줄임. 
 
 detail: 
-치킨집이랑 집간의 거리구하는 방법을 처음엔 bfs, 그러나 두 좌표간의 거리를 알기 때문에 이중포문이 시간적게걸린다. 
+치킨집이랑 집간의 거리구하는 방법을 처음엔 bfs, 
+그러나 두 좌표간의 거리를 알기 때문에 이중포문이 시간적게걸린다. 
 
 
  */
@@ -21,6 +22,7 @@ detail:
 using namespace std;
 
 #define VISITED 999
+
 int ans=9999;
 
 typedef struct pos{
@@ -45,17 +47,15 @@ bool safe(int x, int y)
 int getDistance()
 {
     int sum = 0;
-    for(vector<pos>::iterator it = house.begin();it!=house.end();++it)
+    for(int i=0;i<house.size();i++)
     {
-        int minVal = 9999;
-        for(vector<pos>::iterator it_bbq = bbq.begin();it_bbq!=bbq.end();++it_bbq)
+         int minVal = 9999;
+        for(int j=0;j<bbq.size();j++)
         {
-            int bbq_idx = it_bbq - bbq.begin();
-
-            if(visited[bbq_idx])
-                minVal = min(minVal, (abs((it->x - it_bbq->x)) + abs((it->y - it_bbq->y))));
+             if(visited[j])
+                minVal = min(minVal, (abs((house[i].x - bbq[j].x)) + abs((house[i].y - bbq[j].y))));
         }
-        sum += minVal;
+         sum += minVal;
     }
     return sum;
 }
@@ -67,13 +67,13 @@ void solve(int idx, int dep)
         if(ans > distance) ans = distance;
         return;
     }
-    if(idx > bbq.size()) return;
-    visited[idx] = true;//i번째 체인점선택!
-    solve(idx+1, dep-1);
-
-    visited[idx] = false;//i번째 체인점 안선택!  
-    solve(idx+1, dep);
-
+    
+    for(int i = idx ; i < bbq.size();i++)
+    {
+        visited[i] = true;//i번째 체인점선택!
+        solve(i+1, dep-1);
+        visited[i] = false;
+    }
 }
 
 int main()
