@@ -52,6 +52,7 @@
 ## BFS or Complete Search
 |체감난이도        | problem title| Memo|
 |:-------------:|:-------------|:-------------| 
+||[16197. 두 동전](bfs/twocoin.cpp)|simple|
 ||[16234. 인구 이동](bfs/migration.cpp)|bfs,dfs든 상관없음. 조건이 복잡함..|
 ||[5014.스타트링크](bfs/startlink.cpp)|굳이 bfs쓰지 않아도되던...|
 ||[[S/W 문제해결 응용] 4일차 - 보급로](bfs/recover2.cpp)|dikstra, priority queue,|
